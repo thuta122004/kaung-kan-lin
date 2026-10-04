@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html lang="my" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ကောင်းကံလင်း | Kaung Kan Lin</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vanilla: '#FAF6F0',
+                        'rose-soft': '#FDF2F4',
+                        blush: '#F2D7D9',
+                        copper: '#B8733E',
+                        gold: '#D4AF37',
+                        crimson: '#8C2D42',
+                        charcoal: '#2C221E',
+                        sand: '#7A6B63',
+                    },
+                    fontFamily: {
+                        mm: ['"Noto Sans Myanmar"', 'sans-serif'],
+                        serifEn: ['"Cormorant Garamond"', 'serif'],
+                        sansEn: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- GSAP & ScrollToPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <!-- Custom Embedded Styles & Animations -->
+    <style>
+        :root {
+            --bg-vanilla: #FAF6F0;
+            --copper: #B8733E;
+            --gold: #D4AF37;
+        }
+
+        body {
+            background-color: var(--bg-vanilla);
+            color: #2C221E;
+            font-family: 'Noto Sans Myanmar', 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .lang-en body,
+        body.lang-en {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .lang-en h1,
+        .lang-en h2,
+        .lang-en h3,
+        .lang-en .font-serif-heading {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Soft Pink Glassmorphism Styling */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 10px 32px 0 rgba(184, 115, 62, 0.07);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.75);
+            box-shadow: 0 20px 40px 0 rgba(184, 115, 62, 0.12);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .glass-nav {
+            background: rgba(250, 246, 240, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(242, 215, 217, 0.6);
+        }
+
+        /* Ambient Floating Orbs */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(253, 242, 244, 0.9) 0%, rgba(242, 215, 217, 0.5) 70%, transparent 100%);
+            top: -100px;
+            left: -100px;
+            animation: floatOrb 12s infinite alternate ease-in-out;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(184, 115, 62, 0.1) 60%, transparent 100%);
+            top: 400px;
+            right: -150px;
+            animation: floatOrb 16s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(40px, 50px) scale(1.08);
+            }
+        }
+
+        /* Candle Flame SVG Dynamics */
+        @keyframes flameFlicker {
+            0% {
+                transform: scale(1) rotate(-1deg);
+                opacity: 0.95;
+            }
+
+            20% {
+                transform: scale(1.05) rotate(1deg);
+                opacity: 1;
+            }
+
+            40% {
+                transform: scale(0.98) rotate(-2deg);
+                opacity: 0.9;
+            }
+
+            60% {
+                transform: scale(1.03) rotate(1.5deg);
+                opacity: 0.98;
+            }
+
+            80% {
+                transform: scale(0.97) rotate(-0.5deg);
+                opacity: 0.92;
+            }
+
+            100% {
+                transform: scale(1) rotate(-1deg);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes auraPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.4;
+            }
+
+            50% {
+                transform: scale(1.18);
+                opacity: 0.65;
+            }
+        }
+
+        @keyframes particleRise {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            30% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-90px) scale(0.2);
+                opacity: 0;
+            }
+        }
+
+        .flame-animated {
+            transform-origin: bottom center;
+            animation: flameFlicker 2.2s infinite ease-in-out;
+        }
+
+        .aura-animated {
+            transform-origin: center;
+            animation: auraPulse 3.5s infinite ease-in-out;
+        }
+
+        .particle-1 {
+            animation: particleRise 3s infinite ease-out 0.2s;
+        }
+
+        .particle-2 {
+            animation: particleRise 3.8s infinite ease-out 1.1s;
+        }
+
+        .particle-3 {
+            animation: particleRise 2.6s infinite ease-out 1.8s;
+        }
+
+        /* Button Styling */
+        .btn-gold {
+            background: linear-gradient(135deg, #B8733E 0%, #D4AF37 100%);
+            color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(184, 115, 62, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #A06132 0%, #C39E2E 100%);
+            box-shadow: 0 6px 20px rgba(184, 115, 62, 0.38);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(184, 115, 62, 0.4);
+            color: #B8733E;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(184, 115, 62, 0.08);
+            border-color: #B8733E;
+            color: #8C2D42;
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #F2D7D9;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B8733E;
+        }
+    </style>
+</head>
+
+<body class="relative min-h-screen text-charcoal bg-vanilla selection:bg-blush selection:text-crimson">
+
+    <!-- Ambient Floating Orbs Background Layer -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+    </div>
+
+    <!-- Sticky Header & Navbar -->
+    <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div
+                    class="w-10 h-10 rounded-full bg-gradient-to-tr from-copper to-gold flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M12 2c0 0-4 4-4 8 0 2.2 1.8 4 4 4s4-1.8 4-4c0-4-4-8-4-8z" fill="#FFF7AD"
+                            stroke="#D4AF37" />
+                        <path d="M12 14v8" stroke="currentColor" stroke-linecap="round" />
+                        <path d="M8 22h8" stroke="currentColor" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div>
+                    <span
+                        class="block text-lg font-bold tracking-tight text-charcoal font-mm leading-tight">ကောင်းကံလင်း</span>
+                    <span class="block text-xs font-semibold tracking-wider text-copper uppercase font-sansEn">Kaung Kan
+                        Lin</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#hero"
+                    class="hover:text-copper transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-copper hover:after:w-full after:transition-all"
+                    data-i18n="navHome">ပင်မစာမျက်နှာ</a>
+                <a href="#story"
+                    class="hover:text-copper transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-copper hover:after:w-full after:transition-all"
+                    data-i18n="navStory">ကျွန်ုပ်တို့၏ သမိုင်း</a>
+                <a href="#bestsellers"
+                    class="hover:text-copper transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-copper hover:after:w-full after:transition-all"
+                    data-i18n="navBestsellers">အရောင်းရဆုံး</a>
+                <a href="#catalog"
+                    class="hover:text-copper transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-copper hover:after:w-full after:transition-all"
+                    data-i18n="navCatalog">ပစ္စည်းများ</a>
+                <a href="#contact"
+                    class="hover:text-copper transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-copper hover:after:w-full after:transition-all"
+                    data-i18n="navContact">ဆက်သွယ်ရန်</a>
+            </nav>
+
+            <!-- Action Controls: Language Toggle & Cart Button -->
+            <div class="flex items-center space-x-2 sm:space-x-4 shrink-0">
+
+                <!-- EN / MM Language Toggle Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()"
+                    class="px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-semibold border border-copper/30 bg-white/50 text-copper hover:bg-copper hover:text-white transition-all flex items-center gap-1 sm:gap-1.5 shadow-sm"
+                    title="Switch Language">
+                    <i class="fa-solid fa-globe text-xs"></i>
+                    <span id="langLabel">EN</span>
+                </button>
+
+                <!-- Shopping Cart Trigger Button -->
+                <button onclick="toggleCartDrawer(true)"
+                    class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/70 border border-white/80 hover:bg-white text-charcoal shadow-sm hover:shadow transition-all group flex items-center justify-center">
+                    <i class="fa-solid fa-bag-shopping text-base group-hover:text-copper transition-colors"></i>
+                    <span id="cartBadge"
+                        class="absolute -top-1 -right-1 bg-crimson text-white text-[9px] font-bold font-sansEn leading-none min-w-[20px] h-5 px-1 rounded-full flex items-center justify-center border-2 border-white shadow-sm transition-transform scale-100">0</span>
+                </button>
+
+                <!-- Mobile Menu Toggle -->
+                <button onclick="toggleMobileNav()"
+                    class="md:hidden p-1.5 sm:p-2 rounded-lg text-charcoal hover:bg-white/50">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Mobile Dropdown Nav Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-white/60 px-6 py-4 space-y-3">
+            <a href="#hero" onclick="toggleMobileNav()" class="block py-2 text-base font-medium hover:text-copper"
+                data-i18n="navHome">ပင်မစာမျက်နှာ</a>
+            <a href="#story" onclick="toggleMobileNav()" class="block py-2 text-base font-medium hover:text-copper"
+                data-i18n="navStory">ကျွန်ုပ်တို့၏ သမိုင်း</a>
+            <a href="#bestsellers" onclick="toggleMobileNav()"
+                class="block py-2 text-base font-medium hover:text-copper" data-i18n="navBestsellers">အရောင်းရဆုံး</a>
+            <a href="#catalog" onclick="toggleMobileNav()" class="block py-2 text-base font-medium hover:text-copper"
+                data-i18n="navCatalog">ပစ္စည်းများ</a>
+            <a href="#contact" onclick="toggleMobileNav()" class="block py-2 text-base font-medium hover:text-copper"
+                data-i18n="navContact">ဆက်သွယ်ရန်</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (#hero) -->
+    <section id="hero" class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+                <!-- Hero Text & Copy Block -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-blush shadow-xs text-xs font-semibold text-copper">
+                        <i class="fa-solid fa-fire text-gold"></i>
+                        <span data-i18n="heroBadge">မြန်မာ့ရိုးရာ ၁၀၀% သဘာဝ ဖယောင်းအေး</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal leading-[1.6] sm:leading-[1.5] lg:leading-[1.4] font-serif-heading"
+                        data-i18n="heroTitle">
+                        မြန်မာ့ရိုးရာ မြင့်မြတ်သော အလင်းရောင်နှင့် စိတ်ချမ်းမြေ့မှု
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-sand max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
+                        data-i18n="heroSubtitle">
+                        သဘာဝ ဖယောင်းအေးအနှစ်နှင့် ခိုင်မာသော နှီးတိုင်၊ ဝါဂွမ်းမီးစာတို့ဖြင့် စနစ်တကျ လက်ရာမြောက်စွာ
+                        ဖန်တီးထားသော အငွေ့ကင်းစင်သည့် ကောင်းကံလင်း ဖယောင်းတိုင်များ။
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#catalog"
+                            class="w-full sm:w-auto px-8 py-3.5 rounded-full btn-gold font-semibold text-center text-sm tracking-wide shadow-lg"
+                            data-i18n="heroCtaPrimary">
+                            ပစ္စည်းများ ကြည့်ရှုရန်
+                        </a>
+                        <a href="#story"
+                            class="w-full sm:w-auto px-8 py-3.5 rounded-full btn-outline font-semibold text-center text-sm tracking-wide"
+                            data-i18n="heroCtaSecondary">
+                            ကျွန်ုပ်တို့၏ သမိုင်း
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div
+                        class="pt-8 border-t border-blush/60 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <p class="text-xl sm:text-2xl font-bold text-copper font-sansEn">100%</p>
+                            <p class="text-xs text-sand font-medium" data-i18n="stat1">သဘာဝ ဖယောင်းအေး</p>
+                        </div>
+                        <div>
+                            <p class="text-xl sm:text-2xl font-bold text-copper font-sansEn">0%</p>
+                            <p class="text-xs text-sand font-medium" data-i18n="stat2">အမှိုးအငွေ့ ကင်းစင်မှု</p>
+                        </div>
+                        <div>
+                            <p class="text-xl sm:text-2xl font-bold text-copper font-sansEn">5,000+</p>
+                            <p class="text-xs text-sand font-medium" data-i18n="stat3">ရောင့်ရဲသော မီးထွန်းသူများ</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Parallax Hero Candle Frame -->
+                <div class="lg:col-span-5 flex justify-center" style="perspective: 1000px;">
+                    <div id="heroParallaxCard"
+                        class="relative w-full max-w-md p-5 sm:p-8 rounded-3xl glass-card text-center border border-white/80 transition-transform duration-200 ease-out">
+
+                        <!-- Glow Aura Element -->
+                        <div
+                            class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gold/30 rounded-full blur-3xl aura-animated pointer-events-none">
+                        </div>
+
+                        <!-- Candle Interactive SVG Graphic -->
+                        <div class="relative h-64 sm:h-80 w-full flex items-center justify-center my-4">
+                            <svg class="w-48 sm:w-64 h-full" viewBox="0 0 200 300" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+
+                                <!-- Floating Light Embers Particles -->
+                                <circle class="particle-1" cx="95" cy="80" r="2.5" fill="#D4AF37" opacity="0.8" />
+                                <circle class="particle-2" cx="108" cy="70" r="3" fill="#FF8C00" opacity="0.8" />
+                                <circle class="particle-3" cx="102" cy="90" r="2" fill="#FFE4B5" opacity="0.9" />
+
+                                <!-- Outer Soft Glow Circles -->
+                                <circle cx="100" cy="100" r="50" fill="url(#glowGradient)" opacity="0.35"
+                                    class="aura-animated" />
+
+                                <!-- Candle Flame Group -->
+                                <g class="flame-animated" style="transform-origin: 100px 105px;">
+                                    <!-- Outer Flame -->
+                                    <path d="M100 45 C88 75 88 100 100 105 C112 100 112 75 100 45 Z"
+                                        fill="url(#outerFlame)" />
+                                    <!-- Core Flame -->
+                                    <path d="M100 62 C94 82 94 98 100 102 C106 98 106 82 100 62 Z"
+                                        fill="url(#innerFlame)" />
+                                    <!-- Hot Inner Core -->
+                                    <ellipse cx="100" cy="95" rx="3" ry="6" fill="#FFFFFF" />
+                                </g>
+
+                                <!-- Candle Wick -->
+                                <path d="M100 105 L100 120" stroke="#3A2518" stroke-width="2.5"
+                                    stroke-linecap="round" />
+
+                                <!-- Paraffin Candle Body -->
+                                <rect x="75" y="120" width="50" height="130" rx="6" fill="url(#candleBody)"
+                                    stroke="rgba(255,255,255,0.8)" stroke-width="1.5" />
+                                <!-- Melted Rim Highlight -->
+                                <ellipse cx="100" cy="120" rx="25" ry="5" fill="#FFFBF5" />
+                                <path d="M85 120 C85 130 92 135 92 123" fill="none" stroke="#FAF6F0" stroke-width="2" />
+
+                                <!-- Brass / Lotus Base Pedestal -->
+                                <path d="M60 250 L140 250 L148 262 C148 266 140 270 100 270 C60 270 52 266 52 262 Z"
+                                    fill="url(#baseGradient)" />
+                                <ellipse cx="100" cy="250" rx="40" ry="6" fill="#B8733E" />
+
+                                <!-- SVG Gradients -->
+                                <defs>
+                                    <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#FFE082" stop-opacity="1" />
+                                        <stop offset="60%" stop-color="#FFB300" stop-opacity="0.4" />
+                                        <stop offset="100%" stop-color="#B8733E" stop-opacity="0" />
+                                    </radialGradient>
+
+                                    <linearGradient id="outerFlame" x1="100" y1="45" x2="100" y2="105"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#FFF59D" />
+                                        <stop offset="40%" stop-color="#FFA726" />
+                                        <stop offset="100%" stop-color="#E65100" />
+                                    </linearGradient>
+
+                                    <linearGradient id="innerFlame" x1="100" y1="62" x2="100" y2="102"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#FFFFFF" />
+                                        <stop offset="60%" stop-color="#FFEE58" />
+                                        <stop offset="100%" stop-color="#F57C00" />
+                                    </linearGradient>
+
+                                    <linearGradient id="candleBody" x1="75" y1="120" x2="125" y2="250"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#FFFFFF" />
+                                        <stop offset="30%" stop-color="#FAF6F0" />
+                                        <stop offset="100%" stop-color="#F2D7D9" />
+                                    </linearGradient>
+
+                                    <linearGradient id="baseGradient" x1="52" y1="250" x2="148" y2="270"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0%" stop-color="#D4AF37" />
+                                        <stop offset="50%" stop-color="#B8733E" />
+                                        <stop offset="100%" stop-color="#8C2D42" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+
+                        <div class="space-y-1">
+                            <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="heroCardTitle">
+                                ကောင်းကံလင်း အထူးနှီးတိုင်</h3>
+                            <p class="text-xs text-sand font-medium" data-i18n="heroCardDesc">ရိုးရာ ဖယောင်းအေးအနှစ်
+                                ၁၀၀% သန့်စင်မှု</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage & Craftsmanship Section (#story) -->
+    <section id="story" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-copper" data-i18n="storySubtitle">အစဉ်အလာ
+                    လက်ရာမြောက်မှုနှင့် မြင့်မြတ်သော ပူဇော်မှု</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+                    data-i18n="storyTitle">
+                    ရှေးရိုးရာ အနုပညာနှင့် အရည်အသွေးသန့် အလင်းရောင်</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-copper to-gold mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- 4 Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                    <div
+                        class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
+                        <i class="fa-solid fa-droplet text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card1Title">သဘာဝ
+                        ဖယောင်းအေးအနှစ်</h3>
+                    <p class="text-xs text-sand leading-relaxed" data-i18n="card1Desc">
+                        အငွေ့ကင်းစင်ပြီး မီးတောက် တည်ငြိမ်စေရန် သန့်စင်ပြီး ရိုးရာ ဖယောင်းအေးအနှစ်ကို သာ
+                        သုံးစွဲထားပါသည်။
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                    <div
+                        class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
+                        <i class="fa-solid fa-seedling text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card2Title">ခိုင်မာသော
+                        နှီးတိုင်နှင့် ဂွမ်းစာတိုင်</h3>
+                    <p class="text-xs text-sand leading-relaxed" data-i18n="card2Desc">
+                        မြန်မာ့ရိုးရာ နှီးစက်လက်ရာနှင့် ၁၀၀% သဘာဝ ဝါဂွမ်းမီးစာဖြင့် ကျိုချက်ပြုလုပ်ထားပါသည်။
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                    <div
+                        class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
+                        <i class="fa-solid fa-wind text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card3Title">
+                        အငွေ့ကင်းစင်ပြီး တည်ငြိမ်သော အလင်း</h3>
+                    <p class="text-xs text-sand leading-relaxed" data-i18n="card3Desc">
+                        အမှိုးအငွေ့ မထွက်ဘဲ ပတ်ဝန်းကျင်ကို သန့်ရှင်းလန်းဆန်းစေကာ အလင်းရောင် ကြာရှည် ခံပါသည်။
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                    <div
+                        class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
+                        <i class="fa-solid fa-spa text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card4Title">အနာဂတ်
+                        ရနံ့သစ်များအတွက် ပြင်ဆင်မှု</h3>
+                    <p class="text-xs text-sand leading-relaxed" data-i18n="card4Desc">
+                        အနာဂတ်တွင် သဘာဝ ရနံ့သစ်များ ထည့်သွင်းနိုင်ရန် Botanical Scent structure ဖြင့် စနစ်တကျ
+                        စီစဉ်ထားပါသည်။
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Best Sellers Showcase (#bestsellers) -->
+    <section id="bestsellers" class="py-20 relative bg-rose-soft/30 border-y border-blush/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-copper"
+                        data-i18n="bestsellersSubtitle">ဘုရားရှိခိုး ပူဇော်ရန်နှင့် အလှဆင်ရန် အကောင်းဆုံး
+                        ရွေးချယ်မှုများ</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+                        data-i18n="bestsellersTitle">လူကြိုက်အများဆုံး ရိုးရာဖယောင်းတိုင်များ</h2>
+                </div>
+                <a href="#catalog"
+                    class="mt-4 md:mt-0 text-sm font-semibold text-copper hover:text-crimson transition-colors flex items-center gap-2 group">
+                    <span data-i18n="viewAll">အားလုံး ကြည့်ရှုရန်</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Dynamic Best Sellers Cards Container -->
+            <div id="bestsellersContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Rendered via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Dynamic Product Catalog Section (#catalog) -->
+    <section id="catalog" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-6">
+                <span class="text-xs font-bold uppercase tracking-widest text-copper"
+                    data-i18n="catalogSubtitle">သင်နှစ်သက်ရာ ဖယောင်းတိုင် အမျိုးအစားများကို ရှာဖွေရွေးချယ်ပါ</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+                    data-i18n="catalogTitle">
+                    ကောင်းကံလင်း ဖယောင်းတိုင် ပစ္စည်းစုများ</h2>
+            </div>
+
+            <!-- Search Bar & Category Pills Filters -->
+            <div class="max-w-4xl mx-auto space-y-6 mb-12">
+
+                <!-- Live Search Bar -->
+                <div class="relative">
+                    <i
+                        class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sand text-sm"></i>
+                    <input type="text" id="searchInput" oninput="handleSearch()"
+                        placeholder="ဖယောင်းတိုင် အမည် သို့မဟုတ် အမျိုးအစား ရှာရန်..."
+                        class="w-full pl-11 pr-4 py-3.5 rounded-full glass-card border border-blush focus:outline-none focus:border-copper text-sm text-charcoal placeholder-sand transition-all shadow-xs"
+                        data-i18n-placeholder="searchPlaceholder" />
+                </div>
+
+                <!-- Category Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categoryPills">
+                    <button onclick="filterCategory('All')"
+                        class="cat-pill active px-5 py-2 rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs"
+                        data-cat="All" data-i18n="catAll">အားလုံး</button>
+                    <button onclick="filterCategory('Small')"
+                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        data-cat="Small" data-i18n="catSmall">အသေး</button>
+                    <button onclick="filterCategory('Normal')"
+                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        data-cat="Normal" data-i18n="catNormal">ပုံမှန်</button>
+                    <button onclick="filterCategory('Large')"
+                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        data-cat="Large" data-i18n="catLarge">အကြီး</button>
+                </div>
+
+            </div>
+
+            <!-- Catalog Dynamic Grid -->
+            <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered via JS -->
+            </div>
+
+            <!-- Empty State Indicator -->
+            <div id="emptyCatalogState" class="hidden text-center py-16 space-y-4">
+                <div
+                    class="w-16 h-16 mx-auto rounded-full bg-blush/40 flex items-center justify-center text-copper text-2xl">
+                    <i class="fa-solid fa-magnifying-glass-minus"></i>
+                </div>
+                <p class="text-sand text-sm font-medium" data-i18n="emptyCatalogMsg">ရှာဖွေမှုနှင့် ကိုက်ညီသော
+                    ဖယောင်းတိုင် မတွေ့ရှိပါ။</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Customer Testimonials Section -->
+    <section class="py-20 relative bg-rose-soft/20 border-t border-blush/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-copper"
+                    data-i18n="reviewsSubtitle">ရန်ကုန်နှင့် မန္တလေးမြို့များမှ မြတ်နိုးသူ patron များ၏
+                    အကြံပြုချက်များ</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal font-serif-heading" data-i18n="reviewsTitle">
+                    သုံးစွဲသူများ၏ ရင်ဖွင့်သံများ</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
+                    <div class="text-gold text-sm space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-charcoal leading-relaxed italic" data-i18n="review1Quote">
+                        "ဘုရားရှိခိုးချိန်မှာ မီးတောက်ငြိမ်ပြီး အငွေ့လုံးဝ မထွက်တာကြောင့် အရမ်းစိတ်ချမ်းမြေ့ရပါတယ်။
+                        နှီးတိုင်စက်ပုံစံ လက်ရာကလဲ အလွန်သပ်ရပ်ပါတယ်။"
+                    </p>
+                    <div class="pt-4 border-t border-blush/60 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-charcoal" data-i18n="review1Author">ဒေါ်နန်းမူမူ</h4>
+                            <p class="text-[10px] text-sand" data-i18n="review1Loc">ဗဟန်းမြို့နယ်၊ ရန်ကုန်</p>
+                        </div>
+                        <span
+                            class="text-[10px] px-2 py-0.5 rounded-full bg-copper/10 text-copper font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> <span
+                                data-i18n="verifiedPatron">အတည်ပြုပြီး</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
+                    <div class="text-gold text-sm space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-charcoal leading-relaxed italic" data-i18n="review2Quote">
+                        "မန္တလေးမြို့က ကျောင်းတိုက်ပွဲတော်များအတွက် အမြဲမှာယူပါတယ်။ မီးထွန်းချိန် ကြာရှည်ပြီး လေတိုးလဲ
+                        မငြိမ်းလွယ်ပါဘူး။"
+                    </p>
+                    <div class="pt-4 border-t border-blush/60 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-charcoal" data-i18n="review2Author">ဦးကျော်စွာဝင်း</h4>
+                            <p class="text-[10px] text-sand" data-i18n="review2Loc">ချမ်းအေးသာစံ၊ မန္တလေး</p>
+                        </div>
+                        <span
+                            class="text-[10px] px-2 py-0.5 rounded-full bg-copper/10 text-copper font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> <span
+                                data-i18n="verifiedPatron">အတည်ပြုပြီး</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
+                    <div class="text-gold text-sm space-x-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-xs text-charcoal leading-relaxed italic" data-i18n="review3Quote">
+                        "အိမ်တွင်း အလှဆင်ဖို့အတွက် Golden Aura တိုင်လုံးဖယောင်းတိုင် ဝယ်ခဲ့တာ ဧည့်ခန်းကို
+                        အလွန်ခန့်ညားစေပါတယ်။ Packaging လည်း အဆင့်မြင့်ပါတယ်။"
+                    </p>
+                    <div class="pt-4 border-t border-blush/60 flex items-center justify-between">
+                        <div>
+                            <h4 class="text-xs font-bold text-charcoal" data-i18n="review3Author">မခင်စန္ဒာ</h4>
+                            <p class="text-[10px] text-sand" data-i18n="review3Loc">လှိုင်မြို့နယ်၊ ရန်ကုန်</p>
+                        </div>
+                        <span
+                            class="text-[10px] px-2 py-0.5 rounded-full bg-copper/10 text-copper font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> <span
+                                data-i18n="verifiedPatron">အတည်ပြုပြီး</span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer (#contact) -->
+    <footer id="contact" class="bg-charcoal text-vanilla pt-16 pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+
+                <!-- Brand Info -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-9 h-9 rounded-full bg-gradient-to-tr from-copper to-gold flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2c0 0-4 4-4 8 0 2.2 1.8 4 4 4s4-1.8 4-4c0-4-4-8-4-8z" fill="#FFF7AD"
+                                    stroke="#D4AF37" />
+                                <path d="M12 14v8" stroke="currentColor" stroke-linecap="round" />
+                                <path d="M8 22h8" stroke="currentColor" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold font-mm">ကောင်းကံလင်း</span>
+                    </div>
+                    <p class="text-xs text-sand/90 leading-relaxed" data-i18n="footerAbout">
+                        ကောင်းကံလင်း ဖယောင်းတိုင် လုပ်ငန်းသည် မြန်မာ့ရိုးရာ မြင့်မြတ်သော အလင်းရောင်နှင့်
+                        စိတ်ချမ်းမြေ့မှုကို ခေတ်မီဆန်းသစ်သော လက်ရာဖြင့် ထုတ်လုပ်တင်ဆက်ပါသည်။
+                    </p>
+                    <div class="flex items-center space-x-3 pt-2 text-sand">
+                        <a href="https://viber.com" target="_blank"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all"><i
+                                class="fa-brands fa-viber text-sm"></i></a>
+                        <a href="https://telegram.org" target="_blank"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all"><i
+                                class="fa-brands fa-telegram text-sm"></i></a>
+                        <a href="https://facebook.com" target="_blank"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all"><i
+                                class="fa-brands fa-facebook-f text-sm"></i></a>
+                        <a href="https://instagram.com" target="_blank"
+                            class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all"><i
+                                class="fa-brands fa-instagram text-sm"></i></a>
+                    </div>
+                </div>
+
+                <!-- Flagship Showrooms -->
+                <div class="lg:col-span-4 space-y-3">
+                    <h4 class="text-sm font-bold text-gold uppercase tracking-wider font-sansEn"
+                        data-i18n="footerShowrooms">Our Flagship Showrooms</h4>
+                    <div class="space-y-2 text-xs text-sand/90">
+                        <p class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-copper mt-0.5"></i>
+                            <span data-i18n="yangonShowroom">ရန်ကုန်ဆိုင်: အမှတ် (၄၅)၊ ဗဟန်းလမ်း၊ ဗဟန်းမြို့နယ်၊
+                                ရန်ကုန်။</span>
+                        </p>
+                        <p class="flex items-start gap-2">
+                            <i class="fa-solid fa-location-dot text-copper mt-0.5"></i>
+                            <span data-i18n="mandalayShowroom">မန္တလေးဆိုင်: အမှတ် (၇၈)၊ ၈၄ လမ်း၊ ချမ်းအေးသာစံမြို့နယ်၊
+                                မန္တလေး။</span>
+                        </p>
+                        <p class="flex items-center gap-2 pt-1">
+                            <i class="fa-solid fa-phone text-copper"></i>
+                            <span class="font-sansEn">+95 9 790 000 108 / +95 9 250 000 209</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Newsletter Subscription Form -->
+                <div class="lg:col-span-4 space-y-3">
+                    <h4 class="text-sm font-bold text-gold uppercase tracking-wider font-sansEn"
+                        data-i18n="newsletterTitle">သတင်းလွှာ ရယူပါ</h4>
+                    <p class="text-xs text-sand/90 leading-relaxed" data-i18n="newsletterDesc">
+                        အထူးအစီအစဉ်များနှင့် ရနံ့သစ် မိတ်ဆက်မှုများကို ပထမဆုံး သိရှိနိုင်ရန် စာရင်းသွင်းပါ။
+                    </p>
+                    <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-2 pt-1">
+                        <input type="email" required placeholder="အီးမေးလ် လိပ်စာ ရိုက်ထည့်ပါ..."
+                            class="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white placeholder-sand focus:outline-none focus:border-gold" />
+                        <button type="submit"
+                            class="w-full sm:w-auto px-5 py-2.5 rounded-xl btn-gold font-semibold text-xs whitespace-nowrap"
+                            data-i18n="subscribeBtn">
+                            စာရင်းသွင်းမည်
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-sand/70 gap-4">
+                <p>© 2026 Kaung Kan Lin. All rights reserved.</p>
+                <p class="font-mm">ကောင်းကံလင်း လက်ရာမွန် ဖယောင်းတိုင် လုပ်ငန်း</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Quick View Modal Popup -->
+    <div id="quickViewModal"
+        class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-md">
+        <div
+            class="relative w-full max-w-2xl rounded-3xl glass-card bg-white/90 border border-white p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+
+            <!-- Close Button -->
+            <button onclick="closeQuickView()"
+                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-rose-soft/80 flex items-center justify-center text-charcoal hover:bg-crimson hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                <!-- Product Image -->
+                <div class="relative rounded-2xl overflow-hidden aspect-square bg-rose-soft">
+                    <img id="qvImage" src="" alt="Candle" class="w-full h-full object-cover" />
+                    <span id="qvBadge"
+                        class="absolute top-3 left-3 text-[10px] font-bold px-3 py-1 rounded-full bg-gold text-white shadow-xs"></span>
+                </div>
+
+                <!-- Details -->
+                <div class="space-y-4">
+                    <div>
+                        <span id="qvCategory" class="text-[11px] font-bold text-copper uppercase tracking-wider"></span>
+                        <h3 id="qvTitle" class="text-xl font-bold text-charcoal font-serif-heading"></h3>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <span id="qvPriceMMK" class="text-lg font-bold text-crimson font-sansEn"></span>
+                        <span id="qvPriceUSD" class="text-xs text-sand font-medium font-sansEn"></span>
+                    </div>
+
+                    <div class="p-3 rounded-xl bg-rose-soft/60 border border-blush text-xs space-y-1">
+                        <p class="text-sand"><strong class="text-charcoal"
+                                data-i18n="burnTimeLabel">မီးထွန်းချိန်:</strong> <span id="qvBurnTime"
+                                class="font-sansEn font-semibold"></span></p>
+                    </div>
+
+                    <p id="qvDesc" class="text-xs text-sand leading-relaxed"></p>
+
+                    <!-- Formulations / Scent Pyramid -->
+                    <div class="space-y-1 border-t border-blush/60 pt-3 text-xs">
+                        <h4 class="font-bold text-charcoal text-[11px]" data-i18n="notesTitle">ဖယောင်းနှင့်
+                            ရနံ့ဖွဲ့စည်းပုံ</h4>
+                        <p id="qvNotes" class="text-[11px] text-sand italic"></p>
+                    </div>
+
+                    <!-- Quantity Selector & Add to Cart -->
+                    <div class="pt-2 flex items-center gap-3">
+                        <div class="flex items-center border border-blush rounded-xl bg-white/80">
+                            <button onclick="adjustQvQty(-1)" class="px-3 py-1.5 text-sand hover:text-charcoal"><i
+                                    class="fa-solid fa-minus text-xs"></i></button>
+                            <input type="number" id="qvQtyInput" value="1" min="1"
+                                onkeydown="if(['-', '+', 'e', 'E', '.'].includes(event.key)) event.preventDefault();"
+                                onchange="handleQvQtyInput(this)"
+                                class="w-12 text-center text-xs font-bold font-sansEn bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+                            <button onclick="adjustQvQty(1)" class="px-3 py-1.5 text-sand hover:text-charcoal"><i
+                                    class="fa-solid fa-plus text-xs"></i></button>
+                        </div>
+                        <button id="qvAddToCartBtn" onclick="addQvToCart()"
+                            class="flex-1 py-2.5 rounded-xl btn-gold text-xs font-bold shadow-xs flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <span data-i18n="addToCart">ခြင်းထဲထည့်မည်</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Interactive Slide-Over Shopping Cart Drawer -->
+    <div id="cartOverlay" onclick="toggleCartDrawer(false)"
+        class="fixed inset-0 z-50 hidden bg-charcoal/40 backdrop-blur-xs transition-opacity"></div>
+
+    <div id="cartDrawer"
+        class="fixed top-0 right-0 z-50 h-full w-full sm:w-96 glass-card bg-white/95 border-l border-white shadow-2xl transition-transform transform translate-x-full duration-300 flex flex-col">
+
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-blush/60 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-copper text-lg"></i>
+                <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="cartTitle">စျေးဝယ်ခြင်း</h3>
+            </div>
+            <button onclick="toggleCartDrawer(false)"
+                class="w-8 h-8 rounded-full bg-rose-soft flex items-center justify-center text-charcoal hover:bg-crimson hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-sm"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List Container -->
+        <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Dynamic cart items rendered via JS -->
+        </div>
+
+        <!-- Drawer Footer Order Calculations & Order Dispatch Actions -->
+        <div class="p-6 border-t border-blush/60 bg-rose-soft/30 space-y-4">
+
+            <div class="space-y-1">
+                <div class="flex items-center justify-between text-xs text-sand">
+                    <span data-i18n="totalLabel">စုစုပေါင်း</span>
+                    <span id="cartTotalUSD" class="font-bold text-charcoal font-sansEn">$0.00</span>
+                </div>
+                <div class="flex items-center justify-between text-base font-bold text-crimson">
+                    <span>MMK</span>
+                    <span id="cartTotalMMK" class="font-sansEn">0 MMK</span>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <!-- Viber Order Action -->
+                <button onclick="dispatchOrder('viber')"
+                    class="w-full py-3 rounded-xl bg-[#7360F2] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm hover:opacity-95 transition-opacity">
+                    <i class="fa-brands fa-viber text-base"></i>
+                    <span data-i18n="checkoutViber">Viber မှတဆင့် တိုက်ရိုက်မှာယူမည်</span>
+                </button>
+
+                <!-- Telegram Order Action -->
+                <button onclick="dispatchOrder('telegram')"
+                    class="w-full py-3 rounded-xl bg-[#229ED9] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-sm hover:opacity-95 transition-opacity">
+                    <i class="fa-brands fa-telegram text-base"></i>
+                    <span data-i18n="checkoutTelegram">Telegram မှတဆင့် တိုက်ရိုက်မှာယူမည်</span>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Dynamic Toast Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Application Logic JavaScript -->
+    <script>
+        // Register GSAP ScrollToPlugin
+        if (window.gsap && window.ScrollToPlugin) {
+            gsap.registerPlugin(ScrollToPlugin);
+        }
+
+        // Application State
+        let currentLang = 'mm';
+        let cart = [];
+        let activeCategory = 'All';
+        let searchQuery = '';
+        let currentQvProduct = null;
+        let qvQuantity = 1;
+
+        // Master Product Data Array
+        const products = [
+            {
+                id: "candle-01",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Large",
+                categoryName: { mm: "အကြီး", en: "Large Set" },
+                price: { mmk: 3600, usd: 1.71 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၆ တိုင်ပါ အကြီးထုပ်", en: "6-piece Large set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/6candlespack3600whitelarge.jpg",
+                badge: { mm: "အရောင်းရဆုံး", en: "Best Seller" },
+                isBestSeller: true
+            },
+            {
+                id: "candle-02",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Large",
+                categoryName: { mm: "အကြီး", en: "Large Set" },
+                price: { mmk: 3200, usd: 1.52 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၁၀ တိုင်ပါ အကြီးထုပ်", en: "10-piece Large set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/10candlespack3200whitelarge.jpg",
+                badge: { mm: "လူကြိုက်များ", en: "Popular" },
+                isBestSeller: true
+            },
+            {
+                id: "candle-03",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Large",
+                categoryName: { mm: "အကြီး", en: "Large Set" },
+                price: { mmk: 2700, usd: 1.28 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၈ တိုင်ပါ အကြီးထုပ်", en: "8-piece Large set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/8candlespack2700whitelarge.jpg",
+                badge: { mm: "လူကြိုက်များ", en: "Popular" },
+                isBestSeller: true
+            },
+            {
+                id: "candle-04",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Normal",
+                categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
+                price: { mmk: 2100, usd: 1.00 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၁၆ တိုင်ပါ ပုံမှန်ထုပ်", en: "16-piece Normal set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/16candlespack2100whitenormal.jpg",
+                badge: { mm: "လူကြိုက်များ", en: "Popular" },
+                isBestSeller: true
+            },
+            {
+                id: "candle-05",
+                name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
+                category: "Normal",
+                categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
+                price: { mmk: 2180, usd: 1.03 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၁၆ တိုင်ပါ ပုံမှန်ထုပ်", en: "16-piece Normal set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/16candlespack2180rednormal.jpg",
+                badge: { mm: "ဘုရားပူဇော်ရန်", en: "Devotional" },
+                isBestSeller: false
+            },
+            {
+                id: "candle-06",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Normal",
+                categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
+                price: { mmk: 2100, usd: 1.00 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၃၂ တိုင်ပါ ပုံမှန်ထုပ်", en: "32-piece Normal set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/32candlespack2100whitenormal.jpg",
+                badge: { mm: "လူကြိုက်များ", en: "Popular" },
+                isBestSeller: true
+            },
+            {
+                id: "candle-07",
+                name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
+                category: "Normal",
+                categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
+                price: { mmk: 2180, usd: 1.03 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၃၂ တိုင်ပါ ပုံမှန်ထုပ်", en: "32-piece Normal set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/32candlespack2180rednormal.jpg",
+                badge: { mm: "ဘုရားပူဇော်ရန်", en: "Devotional" },
+                isBestSeller: false
+            },
+            {
+                id: "candle-08",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Small",
+                categoryName: { mm: "အသေး", en: "Small Set" },
+                price: { mmk: 1650, usd: 0.78 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၃၂ တိုင်ပါ အသေးထုပ်", en: "32-piece small set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/32candlespack1650whitesmall.jpg",
+                badge: { mm: "ဘုရားပူဇော်ရန်", en: "Devotional" },
+                isBestSeller: false
+            },
+            {
+                id: "candle-09",
+                name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
+                category: "Small",
+                categoryName: { mm: "အသေး", en: "Small Set" },
+                price: { mmk: 1700, usd: 0.80 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၃၂ တိုင်ပါ အသေးထုပ်", en: "32-piece small set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/32candlespack1700redsmall.jpg",
+                badge: { mm: "ဘုရားပူဇော်ရန်", en: "Devotional" },
+                isBestSeller: false
+            },
+            {
+                id: "candle-10",
+                name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
+                category: "Small",
+                categoryName: { mm: "အသေး", en: "Small Set" },
+                price: { mmk: 1030, usd: 0.49 },
+                burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
+                description: { mm: "၂၀ တိုင်ပါ အသေးထုပ်", en: "20-piece small set" },
+                notes: { mm: "-", en: "-" },
+                image: "images/20candlespack1030whitesmall.jpg",
+                badge: { mm: "ဘုရားပူဇော်ရန်", en: "Devotional" },
+                isBestSeller: false
+            }
+        ];
+
+        // Bilingual Localization Dictionary
+        const i18n = {
+            mm: {
+                navHome: "ပင်မစာမျက်နှာ",
+                navStory: "ကျွန်ုပ်တို့၏ သမိုင်း",
+                navBestsellers: "အရောင်းရဆုံး",
+                navCatalog: "ပစ္စည်းများ",
+                navContact: "ဆက်သွယ်ရန်",
+                heroBadge: "မြန်မာ့ရိုးရာ ၁၀၀% သဘာဝ ဖယောင်းအေး",
+                heroTitle: "မြန်မာ့ရိုးရာ မြင့်မြတ်သော အလင်းရောင်နှင့် စိတ်ချမ်းမြေ့မှု",
+                heroSubtitle: "သဘာဝ ဖယောင်းအေးအနှစ်နှင့် ခိုင်မာသော နှီးတိုင်၊ ဝါဂွမ်းမီးစာတို့ဖြင့် စနစ်တကျ လက်ရာမြောက်စွာ ဖန်တီးထားသော အငွေ့ကင်းစင်သည့် ကောင်းကံလင်း ဖယောင်းတိုင်များ။",
+                heroCtaPrimary: "ပစ္စည်းများ ကြည့်ရှုရန်",
+                heroCtaSecondary: "ကျွန်ုပ်တို့၏ သမိုင်း",
+                stat1: "သဘာဝ ဖယောင်းအေး",
+                stat2: "အမှိုးအငွေ့ ကင်းစင်မှု",
+                stat3: "ရောင့်ရဲသော မီးထွန်းသူများ",
+                heroCardTitle: "ကောင်းကံလင်း အထူးနှီးတိုင်",
+                heroCardDesc: "ရိုးရာ ဖယောင်းအေးအနှစ် ၁၀၀% သန့်စင်မှု",
+                storySubtitle: "အစဉ်အလာ လက်ရာမြောက်မှုနှင့် မြင့်မြတ်သော ပူဇော်မှု",
+                storyTitle: "ရှေးရိုးရာ အနုပညာနှင့် အရည်အသွေးသန့် အလင်းရောင်",
+                card1Title: "သဘာဝ ဖယောင်းအေးအနှစ်",
+                card1Desc: "အငွေ့ကင်းစင်ပြီး မီးတောက် တည်ငြိမ်စေရန် သန့်စင်ပြီး ရိုးရာ ဖယောင်းအေးအနှစ်ကို သာ သုံးစွဲထားပါသည်။",
+                card2Title: "ခိုင်မာသော နှီးတိုင်နှင့် ဂွမ်းစာတိုင်",
+                card2Desc: "မြန်မာ့ရိုးရာ နှီးစက်လက်ရာနှင့် ၁၀၀% သဘာဝ ဝါဂွမ်းမီးစာဖြင့် ကျိုချက်ပြုလုပ်ထားပါသည်။",
+                card3Title: "အငွေ့ကင်းစင်ပြီး တည်ငြိမ်သော အလင်း",
+                card3Desc: "အမှိုးအငွေ့ မထွက်ဘဲ ပတ်ဝန်းကျင်ကို သန့်ရှင်းလန်းဆန်းစေကာ အလင်းရောင် ကြာရှည် ခံပါသည်။",
+                card4Title: "အနာဂတ် ရနံ့သစ်များအတွက် ပြင်ဆင်မှု",
+                card4Desc: "အနာဂတ်တွင် သဘာဝ ရနံ့သစ်များ ထည့်သွင်းနိုင်ရန် Botanical Scent structure ဖြင့် စနစ်တကျ စီစဉ်ထားပါသည်။",
+                bestsellersTitle: "လူကြိုက်အများဆုံး ရိုးရာဖယောင်းတိုင်များ",
+                bestsellersSubtitle: "ဘုရားရှိခိုး ပူဇော်ရန်နှင့် အလှဆင်ရန် အကောင်းဆုံး ရွေးချယ်မှုများ",
+                viewAll: "အားလုံး ကြည့်ရှုရန်",
+                catalogTitle: "ကောင်းကံလင်း ဖယောင်းတိုင် ပစ္စည်းစုများ",
+                catalogSubtitle: "သင်နှစ်သက်ရာ ဖယောင်းတိုင် အမျိုးအစားများကို ရှာဖွေရွေးချယ်ပါ",
+                searchPlaceholder: "ဖယောင်းတိုင် အမည် သို့မဟုတ် အမျိုးအစား ရှာရန်...",
+                catAll: "အားလုံး",
+                catSmall: "အသေး",
+                catNormal: "ပုံမှန်",
+                catLarge: "အကြီး",
+                emptyCatalogMsg: "ရှာဖွေမှုနှင့် ကိုက်ညီသော ဖယောင်းတိုင် မတွေ့ရှိပါ။",
+                quickView: "အသေးစိတ်ကြည့်ရန်",
+                addToCart: "ခြင်းထဲထည့်မည်",
+                burnTimeLabel: "မီးထွန်းချိန်",
+                reviewsTitle: "သုံးစွဲသူများ၏ ရင်ဖွင့်သံများ",
+                reviewsSubtitle: "ရန်ကုန်နှင့် မန္တလေးမြို့များမှ မြတ်နိုးသူ patron များ၏ အကြံပြုချက်များ",
+                review1Quote: '"ဘုရားရှိခိုးချိန်မှာ မီးတောက်ငြိမ်ပြီး အငွေ့လုံးဝ မထွက်တာကြောင့် အရမ်းစိတ်ချမ်းမြေ့ရပါတယ်။ နှီးတိုင်စက်ပုံစံ လက်ရာကလဲ အလွန်သပ်ရပ်ပါတယ်။"',
+                review1Author: "ဒေါ်နန်းမူမူ",
+                review1Loc: "ဗဟန်းမြို့နယ်၊ ရန်ကုန်",
+                review2Quote: '"မန္တလေးမြို့က ကျောင်းတိုက်ပွဲတော်များအတွက် အမြဲမှာယူပါတယ်။ မီးထွန်းချိန် ကြာရှည်ပြီး လေတိုးလဲ မငြိမ်းလွယ်ပါဘူး။"',
+                review2Author: "ဦးကျော်စွာဝင်း",
+                review2Loc: "ချမ်းအေးသာစံ၊ မန္တလေး",
+                review3Quote: '"အိမ်တွင်း အလှဆင်ဖို့အတွက် Golden Aura တိုင်လုံးဖယောင်းတိုင် ဝယ်ခဲ့တာ ဧည့်ခန်းကို အလွန်ခန့်ညားစေပါတယ်။ Packaging လည်း အဆင့်မြင့်ပါတယ်။"',
+                review3Author: "မခင်စန္ဒာ",
+                review3Loc: "လှိုင်မြို့နယ်၊ ရန်ကုန်",
+                verifiedPatron: "အတည်ပြုပြီး",
+                cartTitle: "စျေးဝယ်ခြင်း",
+                cartEmpty: "စျေးဝယ်ခြင်းထဲတွင် ပစ္စည်းမရှိသေးပါ။",
+                totalLabel: "စုစုပေါင်း",
+                checkoutViber: "Viber မှတဆင့် တိုက်ရိုက်မှာယူမည်",
+                checkoutTelegram: "Telegram မှတဆင့် တိုက်ရိုက်မှာယူမည်",
+                notesTitle: "ဖယောင်းနှင့် ရနံ့ဖွဲ့စည်းပုံ",
+                footerAbout: "ကောင်းကံလင်း ဖယောင်းတိုင် လုပ်ငန်းသည် မြန်မာ့ရိုးရာ မြင့်မြတ်သော အလင်းရောင်နှင့် စိတ်ချမ်းမြေ့မှုကို ခေတ်မီဆန်းသစ်သော လက်ရာဖြင့် ထုတ်လုပ်တင်ဆက်ပါသည်။",
+                footerShowrooms: "ကျွန်ုပ်တို့၏ အရောင်းဆိုင်များ",
+                yangonShowroom: "ရန်ကုန်ဆိုင်: အမှတ် (၄၅)၊ ဗဟန်းလမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်။",
+                mandalayShowroom: "မန္တလေးဆိုင်: အမှတ် (၇၈)၊ ၈၄ လမ်း၊ ချမ်းအေးသာစံမြို့နယ်၊ မန္တလေး။",
+                newsletterTitle: "သတင်းလွှာ ရယူပါ",
+                newsletterDesc: "အထူးအစီအစဉ်များနှင့် ရနံ့သစ် မိတ်ဆက်မှုများကို ပထမဆုံး သိရှိနိုင်ရန် စာရင်းသွင်းပါ။",
+                subscribeBtn: "စာရင်းသွင်းမည်"
+            },
+            en: {
+                navHome: "Home",
+                navStory: "Heritage",
+                navBestsellers: "Best Sellers",
+                navCatalog: "Catalog",
+                navContact: "Contact",
+                heroBadge: "Traditional 100% Refined Paraffin Craft",
+                heroTitle: "Illuminating Sanctuaries with Sacred Myanmar Heritage",
+                heroSubtitle: "Handcrafted traditional candles formulated with high-purity paraffin wax, bamboo cores, and pure cotton wicks for a clean, stable burn.",
+                heroCtaPrimary: "Explore Catalog",
+                heroCtaSecondary: "Our Heritage",
+                stat1: "Natural Paraffin Pure",
+                stat2: "Zero Soot & Smoke",
+                stat3: "Cherished Patrons",
+                heroCardTitle: "Kaung Kan Lin Royal Taper",
+                heroCardDesc: "100% Refined Paraffin Wax",
+                storySubtitle: "Sacred Craftsmanship & Pure Light",
+                storyTitle: "Traditional Artistry Meets Uncompromising Purity",
+                card1Title: "Refined Traditional Paraffin",
+                card1Desc: "Crafted exclusively using triple-refined paraffin wax to ensure zero soot and a steady, radiant flame.",
+                card2Title: "Bamboo & Hand-Braided Cotton Wicks",
+                card2Desc: "Rooted in traditional Myanmar craftsmanship with natural bamboo structural cores and pure cotton wicks.",
+                card3Title: "Smokeless & Stable Illumination",
+                card3Desc: "Formulated for clean burn cycles that protect home sanctuaries and sacred shrine spaces.",
+                card4Title: "Prepared for Botanical Botanies",
+                card4Desc: "Architected with rich botanical scent pyramids ready for upcoming seasonal scented candle collections.",
+                bestsellersTitle: "Most Cherished Collections",
+                bestsellersSubtitle: "Handpicked choices for sacred shrine devotion and elegant ambiance",
+                viewAll: "Explore All",
+                catalogTitle: "Kaung Kan Lin Candle Collection",
+                catalogSubtitle: "Discover our full range of traditional tapers, devotionals, and decorative sets",
+                searchPlaceholder: "Search candles by title or scent notes...",
+                catAll: "All",
+                catSmall: "Small Set",
+                catNormal: "Normal Set",
+                catLarge: "Large Set",
+                emptyCatalogMsg: "No candles matched your search criteria.",
+                quickView: "Quick View",
+                addToCart: "Add to Cart",
+                burnTimeLabel: "Burn Time",
+                reviewsTitle: "Patron Testimonials",
+                reviewsSubtitle: "Cherished words from candle enthusiasts across Yangon & Mandalay",
+                review1Quote: '"The flame is remarkably steady with zero smoke during daily devotionals. The traditional handcraft is truly exquisite."',
+                review1Author: "Daw Nan Mu Mu",
+                review1Loc: "Bahan Township, Yangon",
+                review2Quote: '"We always order in bulk for monastery light festivals in Mandalay. High wind resistance and long burn duration."',
+                review2Author: "U Kyaw Swar Win",
+                review2Loc: "Chanayethazan, Mandalay",
+                review3Quote: '"The Golden Aura pillar candle elevates our living area tremendously. Luxurious feel and beautiful gilding."',
+                review3Author: "Ma Khin Sandar",
+                review3Loc: "Hlaing Township, Yangon",
+                verifiedPatron: "Verified Patron",
+                cartTitle: "Your Shopping Cart",
+                cartEmpty: "Your cart is currently empty.",
+                totalLabel: "Total",
+                checkoutViber: "Direct Order via Viber",
+                checkoutTelegram: "Direct Order via Telegram",
+                notesTitle: "Formulation & Botanical Notes",
+                footerAbout: "Kaung Kan Lin honors Myanmar's sacred illumination heritage with artisan paraffin craftsmanship and elegant aesthetic designs.",
+                footerShowrooms: "Our Flagship Showrooms",
+                yangonShowroom: "Yangon: No. 45, Bahan Road, Bahan Township, Yangon.",
+                mandalayShowroom: "Mandalay: No. 78, 84th Street, Chanayethazan Township, Mandalay.",
+                newsletterTitle: "Join Our Circle",
+                newsletterDesc: "Subscribe to receive updates on upcoming seasonal botanical scent releases and sacred festival packs.",
+                subscribeBtn: "Subscribe"
+            }
+        };
+
+        // Initializer
+        window.addEventListener('DOMContentLoaded', () => {
+            renderBestSellers();
+            renderCatalog();
+            updateCartUI();
+            initParallaxEffect();
+            initSmoothScroll();
+        });
+
+        // Language Toggle Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'mm' ? 'en' : 'mm';
+            document.documentElement.classList.toggle('lang-en', currentLang === 'en');
+            document.getElementById('langLabel').innerText = currentLang === 'mm' ? 'EN' : 'မြန်မာ';
+
+            // Update DOM Nodes
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (i18n[currentLang][key]) {
+                    el.innerText = i18n[currentLang][key];
+                }
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (i18n[currentLang][key]) {
+                    el.placeholder = i18n[currentLang][key];
+                }
+            });
+
+            // Re-render components with localized strings
+            renderBestSellers();
+            renderCatalog();
+            updateCartUI();
+            if (currentQvProduct) renderQvModalData();
+        }
+
+        // Best Sellers Grid Render
+        function renderBestSellers() {
+            const container = document.getElementById('bestsellersContainer');
+            const bestSellers = products.filter(p => p.isBestSeller);
+
+            container.innerHTML = bestSellers.map(product => `
+        <div class="glass-card rounded-2xl overflow-hidden glass-card-hover flex flex-col justify-between group">
+          <div class="relative aspect-[4/3] overflow-hidden bg-rose-soft">
+            <img src="${product.image}" alt="${product.name[currentLang]}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gold/90 text-white shadow-xs backdrop-blur-xs">
+              ${product.badge[currentLang]}
+            </span>
+          </div>
+
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-1">
+              <span class="text-[10px] font-bold text-copper uppercase tracking-wider">${product.categoryName[currentLang]}</span>
+              <h3 class="text-base font-bold text-charcoal font-serif-heading line-clamp-2 h-12 flex items-center">${product.name[currentLang]}</h3>
+            </div>
+
+            <div class="flex items-center justify-between text-xs border-t border-blush/60 pt-3">
+              <div>
+                <span class="block text-sm font-bold text-crimson font-sansEn">${product.price.mmk.toLocaleString()} MMK</span>
+                <span class="block text-[10px] text-sand font-sansEn">$${product.price.usd.toFixed(2)} USD</span>
+              </div>
+              <span class="text-[10px] text-sand bg-rose-soft px-2 py-1 rounded-md font-sansEn"><i class="fa-regular fa-clock mr-1"></i>${product.burnTime[currentLang]}</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button onclick="openQuickView('${product.id}')" class="py-2 rounded-xl btn-outline text-xs font-semibold text-center">
+                ${i18n[currentLang].quickView}
+              </button>
+              <button onclick="addToCart('${product.id}')" class="py-2 rounded-xl btn-gold text-xs font-semibold text-center flex items-center justify-center gap-1">
+                <i class="fa-solid fa-plus text-[10px]"></i> ${i18n[currentLang].addToCart}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        // Main Catalog Render & Search Filter
+        function renderCatalog() {
+            const grid = document.getElementById('catalogGrid');
+            const emptyState = document.getElementById('emptyCatalogState');
+
+            const filtered = products.filter(product => {
+                const matchesCategory = activeCategory === 'All' || product.category === activeCategory;
+                const matchesSearch = searchQuery === '' ||
+                    product.name[currentLang].toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    product.description[currentLang].toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => `
+        <div class="glass-card rounded-2xl overflow-hidden glass-card-hover flex flex-col justify-between group">
+          <div class="relative aspect-[4/3] overflow-hidden bg-rose-soft">
+            <img src="${product.image}" alt="${product.name[currentLang]}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <span class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gold/90 text-white shadow-xs backdrop-blur-xs">
+              ${product.badge[currentLang]}
+            </span>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-1">
+              <span class="text-[10px] font-bold text-copper uppercase tracking-wider">${product.categoryName[currentLang]}</span>
+              <h3 class="text-base font-bold text-charcoal font-serif-heading line-clamp-2 h-12 flex items-center">${product.name[currentLang]}</h3>
+              <p class="text-xs text-sand line-clamp-2 leading-relaxed">${product.description[currentLang]}</p>
+            </div>
+
+            <div class="flex items-center justify-between text-xs border-t border-blush/60 pt-3">
+              <div>
+                <span class="block text-base font-bold text-crimson font-sansEn">${product.price.mmk.toLocaleString()} MMK</span>
+                <span class="block text-[10px] text-sand font-sansEn">$${product.price.usd.toFixed(2)} USD</span>
+              </div>
+              <span class="text-[10px] text-sand bg-rose-soft px-2.5 py-1 rounded-md font-sansEn"><i class="fa-regular fa-clock mr-1"></i>${product.burnTime[currentLang]}</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button onclick="openQuickView('${product.id}')" class="py-2.5 rounded-xl btn-outline text-xs font-semibold text-center">
+                ${i18n[currentLang].quickView}
+              </button>
+              <button onclick="addToCart('${product.id}')" class="py-2.5 rounded-xl btn-gold text-xs font-semibold text-center flex items-center justify-center gap-1">
+                <i class="fa-solid fa-plus text-[10px]"></i> ${i18n[currentLang].addToCart}
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+        }
+
+        // Category Pill Filter Event
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('#categoryPills button').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = "cat-pill active px-5 py-2 rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs";
+                } else {
+                    btn.className = "cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all";
+                }
+            });
+            renderCatalog();
+        }
+
+        // Search Bar Input Event
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.trim();
+            renderCatalog();
+        }
+
+        // Quick View Modal
+        function openQuickView(id) {
+            currentQvProduct = products.find(p => p.id === id);
+            qvQuantity = 1;
+            renderQvModalData();
+            document.getElementById('quickViewModal').classList.remove('hidden');
+        }
+
+        function renderQvModalData() {
+            if (!currentQvProduct) return;
+
+            qvQuantity = 1;
+
+            document.getElementById('qvImage').src = currentQvProduct.image;
+            document.getElementById('qvBadge').innerText = currentQvProduct.badge[currentLang];
+            document.getElementById('qvCategory').innerText = currentQvProduct.categoryName[currentLang];
+            document.getElementById('qvTitle').innerText = currentQvProduct.name[currentLang];
+            document.getElementById('qvPriceMMK').innerText = `${currentQvProduct.price.mmk.toLocaleString()} MMK`;
+            document.getElementById('qvPriceUSD').innerText = `$${currentQvProduct.price.usd.toFixed(2)} USD`;
+            document.getElementById('qvBurnTime').innerText = currentQvProduct.burnTime[currentLang];
+            document.getElementById('qvDesc').innerText = currentQvProduct.description[currentLang];
+            document.getElementById('qvNotes').innerText = currentQvProduct.notes[currentLang];
+
+            document.getElementById('qvQtyInput').value = qvQuantity;
+        }
+
+        function adjustQvQty(delta) {
+            qvQuantity = Math.max(1, qvQuantity + delta);
+            document.getElementById('qvQtyInput').value = qvQuantity;
+        }
+
+        function handleQvQtyInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '');
+            let val = parseInt(input.value, 10);
+            if (isNaN(val) || val < 1) {
+                qvQuantity = 1;
+            } else {
+                qvQuantity = val;
+            }
+        }
+
+        function setCartQuantity(productId, val) {
+            let cleanVal = String(val).replace(/[^0-9]/g, '');
+            let parsedVal = parseInt(cleanVal, 10);
+            const idx = cart.findIndex(item => item.id === productId);
+
+            if (idx !== -1) {
+                if (isNaN(parsedVal) || parsedVal < 1) {
+                    cart[idx].quantity = 1;
+                } else {
+                    cart[idx].quantity = parsedVal;
+                }
+            }
+            updateCartUI();
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('hidden');
+            currentQvProduct = null;
+        }
+
+        function addQvToCart() {
+            if (currentQvProduct) {
+                addToCart(currentQvProduct.id, qvQuantity);
+                closeQuickView();
+            }
+        }
+
+        function addToCart(productId, qty = 1) {
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += qty;
+            } else {
+                const prod = products.find(p => p.id === productId);
+                cart.push({ ...prod, quantity: qty });
+            }
+            updateCartUI();
+            showToast(currentLang === 'mm' ? 'ပစ္စည်း စျေးဝယ်ခြင်းထဲ ထည့်ပြီးပါပြီ' : 'Item added to shopping cart!');
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const idx = cart.findIndex(item => item.id === productId);
+            if (idx !== -1) {
+                cart[idx].quantity += delta;
+                if (cart[idx].quantity <= 0) {
+                    cart.splice(idx, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            // Badge Count
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cartBadge').innerText = totalItems;
+
+            // Cart Items List
+            const container = document.getElementById('cartItemsContainer');
+            if (cart.length === 0) {
+                container.innerHTML = `
+          <div class="text-center py-12 space-y-3">
+            <div class="w-12 h-12 mx-auto rounded-full bg-rose-soft flex items-center justify-center text-copper text-lg">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <p class="text-xs text-sand font-medium">${i18n[currentLang].cartEmpty}</p>
+          </div>
+        `;
+            } else {
+                container.innerHTML = cart.map(item => `
+          <div class="p-3 rounded-2xl bg-white/80 border border-blush flex items-center gap-3">
+            <img src="${item.image}" alt="${item.name[currentLang]}" class="w-14 h-14 object-cover rounded-xl bg-rose-soft" />
+            <div class="flex-1 space-y-0.5">
+                <h4 class="text-xs font-bold text-charcoal font-serif-heading line-clamp-2 leading-relaxed py-0.5">
+                ${item.name[currentLang]} (${item.description[currentLang]})
+                </h4>
+                <p class="text-[11px] font-bold text-crimson font-sansEn">${item.price.mmk.toLocaleString()} MMK</p>
+                <p class="text-[9px] text-sand font-sansEn">$${item.price.usd.toFixed(2)} USD</p>
+            </div>
+            <div class="flex items-center border border-blush rounded-lg bg-rose-soft/50">
+              <button onclick="updateCartQuantity('${item.id}', -1)" class="px-2 py-1 text-sand hover:text-charcoal"><i class="fa-solid fa-minus text-[10px]"></i></button>
+              <input type="number" value="${item.quantity}" min="1" 
+                onkeydown="if(['-', '+', 'e', 'E', '.'].includes(event.key)) event.preventDefault();"
+                onchange="setCartQuantity('${item.id}', this.value)" 
+                class="w-10 text-center text-xs font-bold font-sansEn bg-transparent focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" />
+              <button onclick="updateCartQuantity('${item.id}', 1)" class="px-2 py-1 text-sand hover:text-charcoal"><i class="fa-solid fa-plus text-[10px]"></i></button>
+            </div>
+          </div>
+        `).join('');
+            }
+
+            // Calculations
+            const totalMMK = cart.reduce((acc, item) => acc + (item.price.mmk * item.quantity), 0);
+            const totalUSD = cart.reduce((acc, item) => acc + (item.price.usd * item.quantity), 0);
+
+            document.getElementById('cartTotalMMK').innerText = `${totalMMK.toLocaleString()} MMK`;
+            document.getElementById('cartTotalUSD').innerText = `$${totalUSD.toFixed(2)} USD`;
+        }
+
+        function toggleCartDrawer(show) {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            if (show) {
+                overlay.classList.remove('hidden');
+                drawer.classList.remove('translate-x-full');
+            } else {
+                overlay.classList.add('hidden');
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function dispatchOrder(platform) {
+            if (cart.length === 0) {
+                showToast(currentLang === 'mm' ? 'ခြင်းထဲတွင် ပစ္စည်းမရှိသေးပါ' : 'Your cart is empty!');
+                return;
+            }
+
+            let orderSummary = `ကောင်းကံလင်း ORDER\n\n`;
+            cart.forEach((item, idx) => {
+                orderSummary += `${idx + 1}. ${item.name[currentLang]} (${item.description[currentLang]}) x ${item.quantity} = ${(item.price.mmk * item.quantity).toLocaleString()} MMK ($${(item.price.usd * item.quantity).toFixed(2)})\n`;
+            });
+
+            const totalMMK = cart.reduce((acc, item) => acc + (item.price.mmk * item.quantity), 0);
+            const totalUSD = cart.reduce((acc, item) => acc + (item.price.usd * item.quantity), 0);
+
+            orderSummary += `\nစုစုပေါင်းကျသင့်ငွေ: ${totalMMK.toLocaleString()} MMK / $${totalUSD.toFixed(2)} USD\n`;
+            orderSummary += `\nကျေးဇူးပြု၍ မှာယူမှုကို အတည်ပြုပေးပါရန်။`;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(orderSummary).then(() => {
+                    showToast(currentLang === 'mm' ? 'Order စာသား ကူးပြီးပါပြီ! Chat တွင် Paste လုပ်၍ ပို့ပေးပါ' : 'Order copied! Please paste in chat.');
+                }).catch(() => { });
+            }
+
+            setTimeout(() => {
+                if (platform === 'viber') {
+                    window.location.href = `viber://chat?number=959402938502`;
+                } else if (platform === 'telegram') {
+                    const encoded = encodeURIComponent(orderSummary);
+                    window.open(`https://t.me/thuta1426`, '_blank');
+                }
+            }, 400);
+        }
+
+        // Newsletter Submission
+        function handleNewsletter(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast(currentLang === 'mm' ? 'သတင်းလွှာ စာရင်းသွင်းမှု အောင်မြင်ပါသည်။' : 'Subscribed to newsletter!');
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'glass-card bg-charcoal text-white text-xs px-4 py-3 rounded-xl shadow-xl flex items-center gap-2 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-gold"></i> <span>${msg}</span>`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Mouse Movement Parallax Effect on Hero Candle Frame
+        function initParallaxEffect() {
+            const card = document.getElementById('heroParallaxCard');
+            if (!card || !window.gsap) return;
+
+            document.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const xPos = (clientX / window.innerWidth - 0.5) * 20;
+                const yPos = (clientY / window.innerHeight - 0.5) * 20;
+
+                gsap.to(card, {
+                    rotationY: xPos,
+                    rotationX: -yPos,
+                    ease: "power1.out",
+                    duration: 0.8
+                });
+            });
+        }
+
+        // GSAP Smooth Scroll Navigation Links
+        function initSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        if (window.gsap && window.ScrollToPlugin) {
+                            gsap.to(window, {
+                                duration: 1,
+                                scrollTo: { y: targetId, offsetY: 80 },
+                                ease: "power2.inOut"
+                            });
+                        } else {
+                            const targetEl = document.querySelector(targetId);
+                            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
