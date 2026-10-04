@@ -1600,36 +1600,63 @@
         }
 
         function dispatchOrder(platform) {
-            if (cart.length === 0) {
+            if (!cart || cart.length === 0) {
                 showToast(currentLang === 'mm' ? 'ခြင်းထဲတွင် ပစ္စည်းမရှိသေးပါ' : 'Your cart is empty!');
                 return;
             }
 
-            let orderSummary = `ကောင်းကံလင်း ORDER\n\n`;
+            let orderSummary = `ကောင်းကံလင်း ORDER\n`;
+
             cart.forEach((item, idx) => {
-                orderSummary += `${idx + 1}. ${item.name[currentLang]} (${item.description[currentLang]}) x ${item.quantity} = ${(item.price.mmk * item.quantity).toLocaleString()} MMK ($${(item.price.usd * item.quantity).toFixed(2)})\n`;
+                const name = item.name?.[currentLang] || item.name?.mm || item.name || '';
+                const desc = item.description?.[currentLang] || item.description?.mm || item.description || '';
+                const descText = desc ? ` (${desc})` : '';
+
+                const itemMMK = (item.price.mmk * item.quantity).toLocaleString();
+                const itemUSD = (item.price.usd * item.quantity).toFixed(2);
+
+                orderSummary += `${idx + 1}. ${name}${descText} x ${item.quantity} = ${itemMMK} MMK ($${itemUSD})\n`;
             });
 
             const totalMMK = cart.reduce((acc, item) => acc + (item.price.mmk * item.quantity), 0);
             const totalUSD = cart.reduce((acc, item) => acc + (item.price.usd * item.quantity), 0);
 
-            orderSummary += `\nစုစုပေါင်းကျသင့်ငွေ: ${totalMMK.toLocaleString()} MMK / $${totalUSD.toFixed(2)} USD\n`;
-            orderSummary += `\nကျေးဇူးပြု၍ မှာယူမှုကို အတည်ပြုပေးပါရန်။`;
+            orderSummary += `စုစုပေါင်း: ${totalMMK.toLocaleString()} MMK / $${totalUSD.toFixed(2)} USD\n`;
+            orderSummary += `ကျေးဇူးပြု၍ မှာယူမှုကို အတည်ပြုပေးပါရန်။`;
 
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(orderSummary).then(() => {
-                    showToast(currentLang === 'mm' ? 'Order စာသား ကူးပြီးပါပြီ! Chat တွင် Paste လုပ်၍ ပို့ပေးပါ' : 'Order copied! Please paste in chat.');
-                }).catch(() => { });
+                navigator.clipboard.writeText(orderSummary).catch(() => { });
             }
 
-            setTimeout(() => {
-                if (platform === 'viber') {
-                    window.location.href = `viber://chat?number=959402938502`;
-                } else if (platform === 'telegram') {
-                    const encoded = encodeURIComponent(orderSummary);
-                    window.open(`https://t.me/thuta1426`, '_blank');
+            const encoded = encodeURIComponent(orderSummary);
+
+            if (platform === 'viber') {
+                if (cart.length > 1) {
+                    showToast(
+                        currentLang === 'mm'
+                            ? 'Order စာသားကို Copy ကူးပြီးပါပြီ! Viber Chat တွင် Paste လုပ်၍ ပို့ပေးပါ'
+                            : 'Order copied to clipboard! Please paste in Viber chat.'
+                    );
+                    setTimeout(() => {
+                        window.location.href = `viber://chat?number=959402938502`;
+                    }, 600);
+                } else {
+                    window.location.href = `viber://forward?text=${encoded}`;
                 }
-            }, 400);
+            } else if (platform === 'telegram') {
+                if (cart.length > 9) {
+                    showToast(
+                        currentLang === 'mm'
+                            ? 'Order စာသား ရှည်သဖြင့် Copy ကူးပေးထားပါသည်။ Telegram တွင် Paste လုပ်ပါ'
+                            : 'Order too long for direct link, copied! Please paste in Telegram.'
+                    );
+                    setTimeout(() => {
+                        window.open(`https://t.me/thuta1426`, '_blank');
+                    }, 600);
+                } else {
+                    window.open(`https://t.me/thuta1426?text=${encoded}`, '_blank');
+                }
+            }
         }
 
         // Newsletter Submission
