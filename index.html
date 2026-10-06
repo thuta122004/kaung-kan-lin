@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FAF7F5" />
     <title>ကောင်းကံလင်း | Kaung Kan Lin</title>
 
     <!-- Google Fonts -->
@@ -23,14 +24,14 @@
             theme: {
                 extend: {
                     colors: {
-                        vanilla: '#FAF6F0',
-                        'rose-soft': '#FDF2F4',
-                        blush: '#F2D7D9',
-                        copper: '#B8733E',
-                        gold: '#D4AF37',
-                        crimson: '#8C2D42',
-                        charcoal: '#2C221E',
-                        sand: '#7A6B63',
+                        vanilla: '#FAF7F5',
+                        'rose-soft': '#FBE8EC',
+                        blush: '#F3D5DA',
+                        copper: '#C86D7C',
+                        gold: '#E8B4B8',
+                        crimson: '#B85B6C',
+                        charcoal: '#231F20',
+                        sand: '#6F6164',
                     },
                     fontFamily: {
                         mm: ['"Noto Sans Myanmar"', 'sans-serif'],
@@ -49,14 +50,26 @@
     <!-- Custom Embedded Styles & Animations -->
     <style>
         :root {
-            --bg-vanilla: #FAF6F0;
-            --copper: #B8733E;
-            --gold: #D4AF37;
+            --bg: #FAF7F5;
+            --blush: #FBE8EC;
+            --rose: #E8B4B8;
+            --rose-deep: #C86D7C;
+            --crimson: #B85B6C;
+            --ink: #231F20;
+            --muted: #6F6164;
+            --glass: rgba(255, 255, 255, 0.62);
+            --glass-line: rgba(255, 255, 255, 0.6);
+            --shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 10px 28px -10px rgba(200, 109, 124, 0.24);
+            --ease: cubic-bezier(.16, 1, .3, 1);
+        }
+
+        html {
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--bg-vanilla);
-            color: #2C221E;
+            background-color: var(--bg);
+            color: var(--ink);
             font-family: 'Noto Sans Myanmar', 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
@@ -73,58 +86,70 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* Soft Pink Glassmorphism Styling */
+        /* Glass surfaces */
         .glass-card {
-            background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.75);
-            box-shadow: 0 10px 32px 0 rgba(184, 115, 62, 0.07);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-line);
+            box-shadow: var(--shadow);
         }
 
         .glass-card-hover {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform .4s var(--ease), box-shadow .4s var(--ease);
         }
 
-        .glass-card-hover:hover {
-            transform: translateY(-6px);
-            background: rgba(255, 255, 255, 0.75);
-            box-shadow: 0 20px 40px 0 rgba(184, 115, 62, 0.12);
-            border-color: rgba(212, 175, 55, 0.5);
+        @media (hover: hover) {
+            .glass-card-hover:hover {
+                transform: translateY(-4px);
+            }
         }
 
         .glass-nav {
-            background: rgba(250, 246, 240, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(242, 215, 217, 0.6);
+            background: rgba(250, 247, 245, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 1px 0 rgba(232, 180, 184, 0.35);
         }
 
-        /* Ambient Floating Orbs */
+        /* Ambient blush orbs */
         .ambient-orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(70px);
             pointer-events: none;
             z-index: 0;
         }
 
         .orb-1 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, rgba(253, 242, 244, 0.9) 0%, rgba(242, 215, 217, 0.5) 70%, transparent 100%);
-            top: -100px;
-            left: -100px;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(251, 232, 236, 0.95) 0%, rgba(232, 180, 184, 0.45) 70%, transparent 100%);
+            top: -60px;
+            left: -80px;
             animation: floatOrb 12s infinite alternate ease-in-out;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(184, 115, 62, 0.1) 60%, transparent 100%);
-            top: 400px;
-            right: -150px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(232, 180, 184, 0.28) 0%, rgba(200, 109, 124, 0.12) 60%, transparent 100%);
+            top: 360px;
+            right: -120px;
             animation: floatOrb 16s infinite alternate-reverse ease-in-out;
+        }
+
+        @media (min-width: 768px) {
+            .orb-1 {
+                width: 450px;
+                height: 450px;
+            }
+
+            .orb-2 {
+                width: 500px;
+                height: 500px;
+            }
         }
 
         @keyframes floatOrb {
@@ -137,11 +162,11 @@
             }
         }
 
-        /* Candle Flame SVG Dynamics */
+        /* Candle flame */
         @keyframes flameFlicker {
             0% {
                 transform: scale(1) rotate(-1deg);
-                opacity: 0.95;
+                opacity: .95;
             }
 
             20% {
@@ -150,23 +175,23 @@
             }
 
             40% {
-                transform: scale(0.98) rotate(-2deg);
-                opacity: 0.9;
+                transform: scale(.98) rotate(-2deg);
+                opacity: .9;
             }
 
             60% {
                 transform: scale(1.03) rotate(1.5deg);
-                opacity: 0.98;
+                opacity: .98;
             }
 
             80% {
-                transform: scale(0.97) rotate(-0.5deg);
-                opacity: 0.92;
+                transform: scale(.97) rotate(-.5deg);
+                opacity: .92;
             }
 
             100% {
                 transform: scale(1) rotate(-1deg);
-                opacity: 0.95;
+                opacity: .95;
             }
         }
 
@@ -175,27 +200,27 @@
             0%,
             100% {
                 transform: scale(1);
-                opacity: 0.4;
+                opacity: .4;
             }
 
             50% {
                 transform: scale(1.18);
-                opacity: 0.65;
+                opacity: .65;
             }
         }
 
         @keyframes particleRise {
             0% {
-                transform: translateY(0) scale(0.8);
+                transform: translateY(0) scale(.8);
                 opacity: 0;
             }
 
             30% {
-                opacity: 0.8;
+                opacity: .8;
             }
 
             100% {
-                transform: translateY(-90px) scale(0.2);
+                transform: translateY(-90px) scale(.2);
                 opacity: 0;
             }
         }
@@ -211,7 +236,7 @@
         }
 
         .particle-1 {
-            animation: particleRise 3s infinite ease-out 0.2s;
+            animation: particleRise 3s infinite ease-out .2s;
         }
 
         .particle-2 {
@@ -222,51 +247,492 @@
             animation: particleRise 2.6s infinite ease-out 1.8s;
         }
 
-        /* Button Styling */
+        /* Buttons */
         .btn-gold {
-            background: linear-gradient(135deg, #B8733E 0%, #D4AF37 100%);
-            color: #FFFFFF;
-            box-shadow: 0 4px 15px rgba(184, 115, 62, 0.25);
-            transition: all 0.3s ease;
-        }
-
-        .btn-gold:hover {
-            background: linear-gradient(135deg, #A06132 0%, #C39E2E 100%);
-            box-shadow: 0 6px 20px rgba(184, 115, 62, 0.38);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, #B85B6C 0%, #C86D7C 100%);
+            color: #fff;
+            box-shadow: 0 6px 16px -6px rgba(184, 91, 108, .55), inset 0 1px 0 rgba(255, 255, 255, .25);
+            transition: transform .2s var(--ease), box-shadow .3s ease;
         }
 
         .btn-outline {
-            border: 1px solid rgba(184, 115, 62, 0.4);
-            color: #B8733E;
-            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(200, 109, 124, .35);
+            color: var(--crimson);
+            background: rgba(255, 255, 255, .55);
             backdrop-filter: blur(8px);
-            transition: all 0.3s ease;
+            -webkit-backdrop-filter: blur(8px);
+            transition: transform .2s var(--ease), background .3s ease;
         }
 
-        .btn-outline:hover {
-            background: rgba(184, 115, 62, 0.08);
-            border-color: #B8733E;
-            color: #8C2D42;
-            transform: translateY(-2px);
+        .btn-gold:active,
+        .btn-outline:active,
+        .tap:active {
+            transform: scale(.95);
         }
 
-        /* Custom Scrollbar */
+        .tap {
+            transition: transform .15s var(--ease);
+        }
+
+        @media (hover: hover) {
+            .btn-gold:hover {
+                box-shadow: 0 10px 22px -8px rgba(184, 91, 108, .65);
+                transform: translateY(-2px);
+            }
+
+            .btn-outline:hover {
+                background: rgba(200, 109, 124, .1);
+                transform: translateY(-2px);
+            }
+        }
+
+        /* Scrollbars */
+        .no-scrollbar {
+            scrollbar-width: none;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
         ::-webkit-scrollbar {
             width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #FAF6F0;
+            background: #FAF7F5;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #F2D7D9;
+            background: #E8B4B8;
             border-radius: 4px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #B8733E;
+        /* Horizontal snap carousels (mobile) -> grids (desktop) */
+        .snap-row {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
+            margin: 0 -16px;
+            padding: 2px 16px 14px;
+            scroll-padding: 0 16px;
+            scrollbar-width: none;
+        }
+
+        .snap-row::-webkit-scrollbar {
+            display: none;
+        }
+
+        .snap-row>* {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+        }
+
+        .p-card-slide {
+            width: 64%;
+            max-width: 240px;
+        }
+
+        .slide-w {
+            width: 84%;
+            max-width: 340px;
+        }
+
+        @media (min-width: 768px) {
+            .snap-row.md-grid {
+                display: grid;
+                overflow: visible;
+                margin: 0;
+                padding: 0;
+                gap: 24px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .snap-row.md-grid>* {
+                width: auto;
+                max-width: none;
+            }
+
+            .snap-row.cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .snap-row.cols-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Product card (compact, 2-col / slider friendly) */
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .p-card {
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, .72);
+            border: 1px solid rgba(255, 255, 255, .85);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            animation: cardIn .5s var(--ease) both;
+            animation-delay: calc(var(--i, 0) * 40ms);
+        }
+
+        .p-media {
+            position: relative;
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: var(--blush);
+            overflow: hidden;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .p-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s var(--ease);
+        }
+
+        @media (hover: hover) {
+            .p-card:hover .p-media img {
+                transform: scale(1.05);
+            }
+        }
+
+        .p-badge,
+        .p-time {
+            position: absolute;
+            left: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.6;
+            padding: 2px 9px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .72);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .7);
+        }
+
+        .p-badge {
+            top: 8px;
+            color: var(--crimson);
+        }
+
+        .p-time {
+            bottom: 8px;
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+        }
+
+        .p-time i {
+            margin-right: 4px;
+            color: var(--rose-deep);
+        }
+
+        .p-body {
+            padding: 10px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+        }
+
+        .p-cat {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--rose-deep);
+        }
+
+        .p-title {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.7;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .p-desc {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.7;
+            display: -webkit-box;
+            line-clamp: 2;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .p-price {
+            margin-top: auto;
+            padding-top: 6px;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .p-price b {
+            font-size: 13px;
+            color: var(--crimson);
+        }
+
+        .p-price small {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .p-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .p-qv {
+            width: 36px;
+            height: 36px;
+            flex: none;
+            border: 0;
+            border-radius: 999px;
+            background: var(--blush);
+            color: var(--crimson);
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+        }
+
+        .p-add {
+            flex: 1;
+            height: 36px;
+            border: 0;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 0 6px;
+            white-space: nowrap;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+        }
+
+        @media (min-width: 768px) {
+            .p-body {
+                padding: 16px;
+                gap: 4px;
+            }
+
+            .p-title {
+                font-size: 15px;
+            }
+
+            .p-desc {
+                font-size: 12px;
+            }
+
+            .p-price b {
+                font-size: 15px;
+            }
+
+            .p-add {
+                height: 40px;
+                font-size: 12px;
+            }
+
+            .p-qv {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Story feature cards: icon-left rows on mobile, centered cards on desktop */
+        .feature-card {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            column-gap: 14px;
+            row-gap: 2px;
+            align-items: start;
+            text-align: left;
+        }
+
+        .feature-card>div:first-child {
+            grid-row: span 2;
+        }
+
+        .feature-card h3 {
+            align-self: end;
+        }
+
+        @media (min-width: 768px) {
+            .feature-card {
+                display: block;
+                text-align: center;
+            }
+
+            .feature-card>*+* {
+                margin-top: 1rem;
+            }
+        }
+
+        /* Sticky filter bar (TikTok-style) */
+        .sticky-filter {
+            position: sticky;
+            top: 56px;
+            z-index: 30;
+            margin: 0 -16px 16px;
+            padding: 8px 16px;
+            background: rgba(250, 247, 245, .82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        @media (min-width: 768px) {
+            .sticky-filter {
+                position: static;
+                max-width: 56rem;
+                margin: 0 auto 3rem;
+                padding: 0;
+                background: none;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+        }
+
+        /* Floating bottom bar */
+        .bottom-bar {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+            z-index: 45;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, .7);
+            box-shadow: 0 14px 32px -10px rgba(184, 91, 108, .4);
+        }
+
+        .bb-btn {
+            flex: 1;
+            height: 46px;
+            border: 0;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            font-size: 19px;
+            color: var(--ink);
+            background: transparent;
+        }
+
+        .bb-cart {
+            flex: 1.7;
+            height: 46px;
+            border: 0;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 16px;
+        }
+
+        .bb-cart span {
+            min-width: 22px;
+            height: 22px;
+            padding: 0 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .92);
+            color: var(--crimson);
+            font: 700 11px/22px 'Plus Jakarta Sans', sans-serif;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .bottom-bar {
+                display: none;
+            }
+        }
+
+        /* Bottom-sheet motion + scroll reveal */
+        @keyframes sheetUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+
+            to {
+                transform: none;
+                opacity: 1;
+            }
+        }
+
+        .sheet-in {
+            animation: sheetUp .38s var(--ease);
+        }
+
+        @media (max-width: 639px) {
+            #cartDrawer.translate-x-full {
+                transform: translateY(100%);
+            }
+        }
+
+        .js-reveal .reveal {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity .7s var(--ease), transform .7s var(--ease);
+        }
+
+        .js-reveal .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .js-reveal .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -292,7 +758,7 @@
 
     <!-- Sticky Header & Navbar -->
     <header class="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 md:h-20 flex items-center justify-between">
 
             <!-- Brand Logo -->
             <a href="#hero" class="flex items-center gap-3 group">
@@ -301,7 +767,7 @@
                     <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <path d="M12 2c0 0-4 4-4 8 0 2.2 1.8 4 4 4s4-1.8 4-4c0-4-4-8-4-8z" fill="#FFF7AD"
-                            stroke="#D4AF37" />
+                            stroke="#E8B4B8" />
                         <path d="M12 14v8" stroke="currentColor" stroke-linecap="round" />
                         <path d="M8 22h8" stroke="currentColor" stroke-linecap="round" />
                     </svg>
@@ -377,37 +843,37 @@
     </header>
 
     <!-- Hero Section (#hero) -->
-    <section id="hero" class="relative pt-12 pb-20 md:py-28 overflow-hidden">
+    <section id="hero" class="relative pt-5 pb-8 md:py-28 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
                 <!-- Hero Text & Copy Block -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="lg:col-span-7 space-y-4 md:space-y-6 text-center lg:text-left">
 
                     <div
                         class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/60 border border-blush shadow-xs text-xs font-semibold text-copper">
-                        <i class="fa-solid fa-fire text-gold"></i>
+                        <i class="fa-solid fa-fire text-copper"></i>
                         <span data-i18n="heroBadge">၁၀၀% စိတ်ချရသော ဖယောင်းတိုင်</span>
                     </div>
 
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal leading-[1.6] sm:leading-[1.5] lg:leading-[1.4] font-serif-heading"
+                    <h1 class="text-[1.65rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal leading-[1.6] sm:leading-[1.5] lg:leading-[1.4] font-serif-heading"
                         data-i18n="heroTitle">
                         စင်ကြယ်သော အလင်း၊ အေးချမ်းသော အိမ်
                     </h1>
 
-                    <p class="text-base sm:text-lg text-sand max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
+                    <p class="text-sm sm:text-lg text-sand max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal"
                         data-i18n="heroSubtitle">
                         ခိုင်မာသော နှီးတိုင်၊ ဖယောင်းစစ်စစ်တို့ဖြင့် စနစ်တကျ ဖန်တီးထားသည့် ကောင်းကံလင်း ဖယောင်းတိုင်။
                     </p>
 
-                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <div class="pt-1 flex flex-row items-center justify-center lg:justify-start gap-2.5 md:gap-4">
                         <a href="#catalog"
-                            class="w-full sm:w-auto px-8 py-3.5 rounded-full btn-gold font-semibold text-center text-sm tracking-wide shadow-lg"
+                            class="flex-1 sm:flex-none px-4 md:px-8 py-3 md:py-3.5 rounded-full btn-gold font-semibold text-center text-sm tracking-wide shadow-lg"
                             data-i18n="heroCtaPrimary">
                             ပစ္စည်းများ ကြည့်ရှုရန်
                         </a>
                         <a href="#story"
-                            class="w-full sm:w-auto px-8 py-3.5 rounded-full btn-outline font-semibold text-center text-sm tracking-wide"
+                            class="flex-1 sm:flex-none px-4 md:px-8 py-3 md:py-3.5 rounded-full btn-outline font-semibold text-center text-sm tracking-wide"
                             data-i18n="heroCtaSecondary">
                             ကျွန်ုပ်တို့၏ သမိုင်း
                         </a>
@@ -415,7 +881,7 @@
 
                     <!-- Trust Badges -->
                     <div
-                        class="pt-8 border-t border-blush/60 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center lg:text-left">
+                        class="pt-4 md:pt-8 border-t border-blush/60 grid grid-cols-3 gap-2 md:gap-4 text-center lg:text-left">
                         <div>
                             <p class="text-xl sm:text-2xl font-bold text-copper font-sansEn">100%</p>
                             <p class="text-xs text-sand font-medium" data-i18n="stat1">သဘာဝ ဖယောင်းသား</p>
@@ -435,7 +901,7 @@
                 <!-- Interactive Parallax Hero Candle Frame -->
                 <div class="lg:col-span-5 flex justify-center" style="perspective: 1000px;">
                     <div id="heroParallaxCard"
-                        class="relative w-full max-w-md p-5 sm:p-8 rounded-3xl glass-card text-center border border-white/80 transition-transform duration-200 ease-out">
+                        class="relative w-full max-w-md p-4 sm:p-8 rounded-3xl glass-card text-center border border-white/80 transition-transform duration-200 ease-out">
 
                         <!-- Glow Aura Element -->
                         <div
@@ -443,12 +909,12 @@
                         </div>
 
                         <!-- Candle Interactive SVG Graphic -->
-                        <div class="relative h-64 sm:h-80 w-full flex items-center justify-center my-4">
+                        <div class="relative h-44 sm:h-80 w-full flex items-center justify-center my-2 sm:my-4">
                             <svg class="w-48 sm:w-64 h-full" viewBox="0 0 200 300" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
 
                                 <!-- Floating Light Embers Particles -->
-                                <circle class="particle-1" cx="95" cy="80" r="2.5" fill="#D4AF37" opacity="0.8" />
+                                <circle class="particle-1" cx="95" cy="80" r="2.5" fill="#E8B4B8" opacity="0.8" />
                                 <circle class="particle-2" cx="108" cy="70" r="3" fill="#FF8C00" opacity="0.8" />
                                 <circle class="particle-3" cx="102" cy="90" r="2" fill="#FFE4B5" opacity="0.9" />
 
@@ -477,19 +943,19 @@
                                     stroke="rgba(255,255,255,0.8)" stroke-width="1.5" />
                                 <!-- Melted Rim Highlight -->
                                 <ellipse cx="100" cy="120" rx="25" ry="5" fill="#FFFBF5" />
-                                <path d="M85 120 C85 130 92 135 92 123" fill="none" stroke="#FAF6F0" stroke-width="2" />
+                                <path d="M85 120 C85 130 92 135 92 123" fill="none" stroke="#FAF7F5" stroke-width="2" />
 
                                 <!-- Brass / Lotus Base Pedestal -->
                                 <path d="M60 250 L140 250 L148 262 C148 266 140 270 100 270 C60 270 52 266 52 262 Z"
                                     fill="url(#baseGradient)" />
-                                <ellipse cx="100" cy="250" rx="40" ry="6" fill="#B8733E" />
+                                <ellipse cx="100" cy="250" rx="40" ry="6" fill="#C86D7C" />
 
                                 <!-- SVG Gradients -->
                                 <defs>
                                     <radialGradient id="glowGradient" cx="50%" cy="50%" r="50%">
                                         <stop offset="0%" stop-color="#FFE082" stop-opacity="1" />
                                         <stop offset="60%" stop-color="#FFB300" stop-opacity="0.4" />
-                                        <stop offset="100%" stop-color="#B8733E" stop-opacity="0" />
+                                        <stop offset="100%" stop-color="#C86D7C" stop-opacity="0" />
                                     </radialGradient>
 
                                     <linearGradient id="outerFlame" x1="100" y1="45" x2="100" y2="105"
@@ -509,15 +975,15 @@
                                     <linearGradient id="candleBody" x1="75" y1="120" x2="125" y2="250"
                                         gradientUnits="userSpaceOnUse">
                                         <stop offset="0%" stop-color="#FFFFFF" />
-                                        <stop offset="30%" stop-color="#FAF6F0" />
-                                        <stop offset="100%" stop-color="#F2D7D9" />
+                                        <stop offset="30%" stop-color="#FAF7F5" />
+                                        <stop offset="100%" stop-color="#F3D5DA" />
                                     </linearGradient>
 
                                     <linearGradient id="baseGradient" x1="52" y1="250" x2="148" y2="270"
                                         gradientUnits="userSpaceOnUse">
-                                        <stop offset="0%" stop-color="#D4AF37" />
-                                        <stop offset="50%" stop-color="#B8733E" />
-                                        <stop offset="100%" stop-color="#8C2D42" />
+                                        <stop offset="0%" stop-color="#E8B4B8" />
+                                        <stop offset="50%" stop-color="#C86D7C" />
+                                        <stop offset="100%" stop-color="#B85B6C" />
                                     </linearGradient>
                                 </defs>
                             </svg>
@@ -537,28 +1003,30 @@
     </section>
 
     <!-- Heritage & Craftsmanship Section (#story) -->
-    <section id="story" class="py-20 relative">
+    <section id="story" class="py-10 md:py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
             <!-- Section Header -->
-            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-copper" data-i18n="storySubtitle">အရေအသွေး ကောင်းမွန်မှုနှင့် မြင့်မြတ်သော ပူဇော်မှု</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+            <div class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-6 md:mb-16 reveal">
+                <span class="text-xs font-semibold tracking-wide text-copper" data-i18n="storySubtitle">အရေအသွေး
+                    ကောင်းမွန်မှုနှင့် မြင့်မြတ်သော ပူဇော်မှု</span>
+                <h2 class="text-[1.65rem] sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
                     data-i18n="storyTitle">
                     ဖြူစင်သော ဖယောင်းသားနှင့် စင်ကြယ်သော အလင်းရောင်</h2>
                 <div class="w-16 h-0.5 bg-gradient-to-r from-copper to-gold mx-auto mt-4 rounded-full"></div>
             </div>
 
             <!-- 4 Pillars Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-8">
 
                 <!-- Feature 1 -->
-                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                <div class="glass-card feature-card reveal p-4 md:p-8 rounded-3xl glass-card-hover">
                     <div
                         class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
                         <i class="fa-solid fa-droplet text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card1Title">၁၀၀% ပါရာဖင်ဖယောင်း</h3>
+                    <h3 class="text-base md:text-lg font-bold text-charcoal font-serif-heading" data-i18n="card1Title">
+                        ၁၀၀% ပါရာဖင်ဖယောင်း</h3>
                     <p class="text-xs text-sand leading-relaxed" data-i18n="card1Desc">
                         မီးတောက် တည်ငြိမ်စေရန် သန့်စင်သော ပါရာဖင်ဖယောင်း ကိုသာ
                         သုံးစွဲထားပါသည်။
@@ -566,12 +1034,13 @@
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                <div class="glass-card feature-card reveal p-4 md:p-8 rounded-3xl glass-card-hover">
                     <div
                         class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
                         <i class="fa-solid fa-seedling text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card2Title">ခိုင်မာသော
+                    <h3 class="text-base md:text-lg font-bold text-charcoal font-serif-heading" data-i18n="card2Title">
+                        ခိုင်မာသော
                         နှီးတိုင်နှင့် ဂွမ်းစာတိုင်</h3>
                     <p class="text-xs text-sand leading-relaxed" data-i18n="card2Desc">
                         မြန်မာ့ရိုးရာ နှီးစက်လက်ရာနှင့် ၁၀၀% သဘာဝ ဝါဂွမ်းမီးစာဖြင့် ကျိုချက်ပြုလုပ်ထားပါသည်။
@@ -579,12 +1048,12 @@
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="glass-card p-8 rounded-2xl glass-card-hover space-y-4 text-center">
+                <div class="glass-card feature-card reveal p-4 md:p-8 rounded-3xl glass-card-hover">
                     <div
                         class="w-14 h-14 mx-auto rounded-2xl bg-rose-soft border border-blush flex items-center justify-center text-copper shadow-xs">
                         <i class="fa-solid fa-wind text-2xl"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="card3Title">
+                    <h3 class="text-base md:text-lg font-bold text-charcoal font-serif-heading" data-i18n="card3Title">
                         တည်ငြိမ်သော အလင်း</h3>
                     <p class="text-xs text-sand leading-relaxed" data-i18n="card3Desc">
                         အငွေ့နည်းပြီး ဖယောင်းတိုင်ကို ကြာရှည်စွာ အသုံးပြုနိုင်ပါသည်။
@@ -597,26 +1066,26 @@
     </section>
 
     <!-- Best Sellers Showcase (#bestsellers) -->
-    <section id="bestsellers" class="py-20 relative bg-rose-soft/30 border-y border-blush/40">
+    <section id="bestsellers" class="py-10 md:py-20 relative bg-rose-soft/30 border-y border-blush/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-4 md:mb-12 reveal">
                 <div class="space-y-2">
-                    <span class="text-xs font-bold uppercase tracking-widest text-copper"
+                    <span class="text-xs font-semibold tracking-wide text-copper"
                         data-i18n="bestsellersSubtitle">ဘုရားရှိခိုး ပူဇော်ရန် အကောင်းဆုံး
                         ရွေးချယ်မှုများ</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+                    <h2 class="text-[1.65rem] sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
                         data-i18n="bestsellersTitle">လူကြိုက်အများဆုံး ဖယောင်းတိုင်များ</h2>
                 </div>
                 <a href="#catalog"
-                    class="mt-4 md:mt-0 text-sm font-semibold text-copper hover:text-crimson transition-colors flex items-center gap-2 group">
+                    class="mt-2 md:mt-0 text-sm font-semibold text-copper hover:text-crimson transition-colors flex items-center gap-2 group">
                     <span data-i18n="viewAll">အားလုံး ကြည့်ရှုရန်</span>
                     <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
 
             <!-- Dynamic Best Sellers Cards Container -->
-            <div id="bestsellersContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div id="bestsellersContainer" class="snap-row md-grid cols-4">
                 <!-- Rendered via JS -->
             </div>
 
@@ -624,19 +1093,19 @@
     </section>
 
     <!-- Dynamic Product Catalog Section (#catalog) -->
-    <section id="catalog" class="py-20 relative">
+    <section id="catalog" class="py-10 md:py-20 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="text-center max-w-3xl mx-auto space-y-3 mb-6">
-                <span class="text-xs font-bold uppercase tracking-widest text-copper"
-                    data-i18n="catalogSubtitle">သင်နှစ်သက်ရာ ဖယောင်းတိုင် အမျိုးအစားများကို ရှာဖွေရွေးချယ်ပါ</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
+            <div class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-4 md:mb-6 reveal">
+                <span class="text-xs font-semibold tracking-wide text-copper" data-i18n="catalogSubtitle">သင်နှစ်သက်ရာ
+                    ဖယောင်းတိုင် အမျိုးအစားများကို ရှာဖွေရွေးချယ်ပါ</span>
+                <h2 class="text-[1.65rem] sm:text-4xl font-bold text-charcoal leading-[1.35] sm:leading-[1.3] font-serif-heading"
                     data-i18n="catalogTitle">
                     ကောင်းကံလင်း ဖယောင်းတိုင်များ</h2>
             </div>
 
             <!-- Search Bar & Category Pills Filters -->
-            <div class="max-w-4xl mx-auto space-y-6 mb-12">
+            <div class="sticky-filter space-y-3 md:space-y-6">
 
                 <!-- Live Search Bar -->
                 <div class="relative">
@@ -644,30 +1113,31 @@
                         class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-sand text-sm"></i>
                     <input type="text" id="searchInput" oninput="handleSearch()"
                         placeholder="ဖယောင်းတိုင် အမည် သို့မဟုတ် အမျိုးအစား ရှာရန်..."
-                        class="w-full pl-11 pr-4 py-3.5 rounded-full glass-card border border-blush focus:outline-none focus:border-copper text-sm text-charcoal placeholder-sand transition-all shadow-xs"
+                        class="w-full pl-11 pr-4 py-3 rounded-full glass-card border border-blush focus:outline-none focus:border-copper text-sm text-charcoal placeholder-sand transition-all shadow-xs"
                         data-i18n-placeholder="searchPlaceholder" />
                 </div>
 
                 <!-- Category Pills -->
-                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categoryPills">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar snap-x md:flex-wrap md:justify-center md:overflow-visible"
+                    id="categoryPills">
                     <button onclick="filterCategory('All')"
-                        class="cat-pill active px-5 py-2 rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs"
+                        class="cat-pill active px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs"
                         data-cat="All" data-i18n="catAll">အားလုံး</button>
                     <button onclick="filterCategory('Small')"
-                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        class="cat-pill px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
                         data-cat="Small" data-i18n="catSmall">အသေး</button>
                     <button onclick="filterCategory('Normal')"
-                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        class="cat-pill px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
                         data-cat="Normal" data-i18n="catNormal">ပုံမှန်</button>
                     <button onclick="filterCategory('Large')"
-                        class="cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
+                        class="cat-pill px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all"
                         data-cat="Large" data-i18n="catLarge">အကြီး</button>
                 </div>
 
             </div>
 
             <!-- Catalog Dynamic Grid -->
-            <div id="catalogGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div id="catalogGrid" class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6">
                 <!-- Rendered via JS -->
             </div>
 
@@ -685,32 +1155,35 @@
     </section>
 
     <!-- Customer Testimonials Section -->
-    <section class="py-20 relative bg-rose-soft/20 border-t border-blush/40">
+    <section class="py-10 md:py-20 relative bg-rose-soft/20 border-t border-blush/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
-                <span class="text-xs font-bold uppercase tracking-widest text-copper"
+            <div class="text-center max-w-3xl mx-auto space-y-2 md:space-y-3 mb-6 md:mb-16 reveal">
+                <span class="text-xs font-semibold tracking-wide text-copper"
                     data-i18n="reviewsSubtitle">ဝယ်ယူအားပေးသူများ၏
                     အကြံပြုချက်များ</span>
-                <h2 class="text-3xl sm:text-4xl font-bold text-charcoal font-serif-heading" data-i18n="reviewsTitle">
+                <h2 class="text-[1.65rem] sm:text-4xl font-bold text-charcoal font-serif-heading"
+                    data-i18n="reviewsTitle">
                     သုံးစွဲသူများ၏ စကားသံ</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="snap-row md-grid cols-3">
 
                 <!-- Testimonial 1 -->
-                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
-                    <div class="text-gold text-sm space-x-1">
+                <div class="glass-card slide-w p-5 md:p-8 rounded-3xl space-y-3 md:space-y-4 relative">
+                    <div class="text-copper text-sm space-x-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i>
                     </div>
                     <p class="text-xs text-charcoal leading-relaxed italic" data-i18n="review1Quote">
-                        "စျေးနှုန်းအလွန်သက်သာပြီး ယုံကြည်စိတ်ချရသောအတွက်ကြောင့် နှစ်ပေါင်းဆယ်စုနှစ်တစ်ခုကြာအောင် ဝယ်ယူအားပေးဖြစ်ခဲ့ပါသည်"
+                        "စျေးနှုန်းအလွန်သက်သာပြီး ယုံကြည်စိတ်ချရသောအတွက်ကြောင့် နှစ်ပေါင်းဆယ်စုနှစ်တစ်ခုကြာအောင်
+                        ဝယ်ယူအားပေးဖြစ်ခဲ့ပါသည်"
                     </p>
                     <div class="pt-4 border-t border-blush/60 flex items-center justify-between">
                         <div>
-                            <h4 class="text-xs font-bold text-charcoal" data-i18n="review1Author">ဦးညီပု ကုန်စုံဆိုင်</h4>
+                            <h4 class="text-xs font-bold text-charcoal" data-i18n="review1Author">ဦးညီပု ကုန်စုံဆိုင်
+                            </h4>
                             <p class="text-[10px] text-sand" data-i18n="review1Loc">လှိုင်သာယာမြို့နယ်၊ ရန်ကုန်</p>
                         </div>
                         <span
@@ -722,8 +1195,8 @@
                 </div>
 
                 <!-- Testimonial 2 -->
-                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
-                    <div class="text-gold text-sm space-x-1">
+                <div class="glass-card slide-w p-5 md:p-8 rounded-3xl space-y-3 md:space-y-4 relative">
+                    <div class="text-copper text-sm space-x-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i>
@@ -745,14 +1218,15 @@
                 </div>
 
                 <!-- Testimonial 3 -->
-                <div class="glass-card p-8 rounded-2xl space-y-4 relative">
-                    <div class="text-gold text-sm space-x-1">
+                <div class="glass-card slide-w p-5 md:p-8 rounded-3xl space-y-3 md:space-y-4 relative">
+                    <div class="text-copper text-sm space-x-1">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
                             class="fa-solid fa-star"></i>
                     </div>
                     <p class="text-xs text-charcoal leading-relaxed italic" data-i18n="review3Quote">
-                        "သယ်ယူရာတွေ စနစ်တကျထုတ်ပိုးပေးပြီး အဆင်ပြေစွာပို့ဆောင်ပေးသည့်အပြင် လက်ကားဝယ်ယူရာတွင် လွန်စွာအဆင်ပြေသည်"
+                        "သယ်ယူရာတွေ စနစ်တကျထုတ်ပိုးပေးပြီး အဆင်ပြေစွာပို့ဆောင်ပေးသည့်အပြင် လက်ကားဝယ်ယူရာတွင်
+                        လွန်စွာအဆင်ပြေသည်"
                     </p>
                     <div class="pt-4 border-t border-blush/60 flex items-center justify-between">
                         <div>
@@ -773,9 +1247,10 @@
     </section>
 
     <!-- Footer (#contact) -->
-    <footer id="contact" class="bg-charcoal text-vanilla pt-16 pb-12 relative overflow-hidden">
+    <footer id="contact" class="bg-charcoal text-vanilla pt-10 md:pt-16 pb-28 md:pb-12 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 md:gap-10 pb-10 md:pb-12 border-b border-white/10">
 
                 <!-- Brand Info -->
                 <div class="lg:col-span-4 space-y-4">
@@ -785,32 +1260,33 @@
                             <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M12 2c0 0-4 4-4 8 0 2.2 1.8 4 4 4s4-1.8 4-4c0-4-4-8-4-8z" fill="#FFF7AD"
-                                    stroke="#D4AF37" />
+                                    stroke="#E8B4B8" />
                                 <path d="M12 14v8" stroke="currentColor" stroke-linecap="round" />
                                 <path d="M8 22h8" stroke="currentColor" stroke-linecap="round" />
                             </svg>
                         </div>
                         <span class="text-xl font-bold font-mm">ကောင်းကံလင်း</span>
                     </div>
-                    <p class="text-xs text-sand/90 leading-relaxed" data-i18n="footerAbout">
-                        ကောင်းကံလင်း ဖယောင်းတိုင် လုပ်ငန်းသည် ဆယ်စုနှစ်တစ်ခုကျော်ကြာသည်ထိတိုင်အောင် ဝယ်ယူသူများ၏ အစဉ်တစိုက်အားပေးမှုကို ရရှိထားသည့် လုပ်ငန်းတစ်ခုဖြစ်သည်
+                    <p class="text-xs text-vanilla/70 leading-relaxed" data-i18n="footerAbout">
+                        ကောင်းကံလင်း ဖယောင်းတိုင် လုပ်ငန်းသည် ဆယ်စုနှစ်တစ်ခုကျော်ကြာသည်ထိတိုင်အောင် ဝယ်ယူသူများ၏
+                        အစဉ်တစိုက်အားပေးမှုကို ရရှိထားသည့် လုပ်ငန်းတစ်ခုဖြစ်သည်
                     </p>
-                    <div class="flex items-center space-x-3 pt-2 text-sand">
+                    <div class="flex items-center space-x-3 pt-2 text-vanilla/70">
                         <a href="viber://chat?number=%2B959402938502" target="_blank" rel="noopener noreferrer"
                             class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all">
                             <i class="fa-brands fa-viber text-sm"></i>
                         </a>
-                    
+
                         <a href="https://t.me/thuta1426" target="_blank" rel="noopener noreferrer"
                             class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all">
                             <i class="fa-brands fa-telegram text-sm"></i>
                         </a>
-                    
+
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
                             class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all">
                             <i class="fa-brands fa-facebook-f text-sm"></i>
                         </a>
-                    
+
                         <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer"
                             class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-copper hover:text-white transition-all">
                             <i class="fa-brands fa-tiktok text-sm"></i>
@@ -822,16 +1298,17 @@
                 <div class="lg:col-span-4 space-y-3">
                     <h4 class="text-sm font-bold text-gold uppercase tracking-wider font-sansEn"
                         data-i18n="footerShowrooms">Our Flagship Showrooms</h4>
-                    <div class="space-y-2 text-xs text-sand/90">
+                    <div class="space-y-2 text-xs text-vanilla/70">
                         <p class="flex items-start gap-2">
                             <i class="fa-solid fa-location-dot text-copper mt-0.5"></i>
-                            <span data-i18n="showroom1">ရန်ကုန်ဆိုင်: အမှတ် (၃၂၅ ခ)၊ သခင်ဖိုးလှကြီး ၃ လမ်း၊ လှိုင်သာယာမြို့နယ်၊
+                            <span data-i18n="showroom1">ရန်ကုန်ဆိုင်: အမှတ် (၃၂၅ ခ)၊ သခင်ဖိုးလှကြီး ၃ လမ်း၊
+                                လှိုင်သာယာမြို့နယ်၊
                                 ရန်ကုန်။</span>
                         </p>
                         <p class="flex items-start gap-2">
                             <i class="fa-solid fa-location-dot text-copper mt-0.5"></i>
                             <span data-i18n="showroom2">ရန်ကုန်ဆိုင်: အမှတ် (၂၆)၊ ဆဒ္ဒန်လမ်း၊ အလုံမြို့နယ်၊
-                            ရန်ကုန်။</span>
+                                ရန်ကုန်။</span>
                         </p>
                         <p class="flex items-center gap-2 pt-1">
                             <i class="fa-solid fa-phone text-copper"></i>
@@ -844,12 +1321,12 @@
                 <div class="lg:col-span-4 space-y-3">
                     <h4 class="text-sm font-bold text-gold uppercase tracking-wider font-sansEn"
                         data-i18n="newsletterTitle">သတင်းလွှာ ရယူပါ</h4>
-                    <p class="text-xs text-sand/90 leading-relaxed" data-i18n="newsletterDesc">
+                    <p class="text-xs text-vanilla/70 leading-relaxed" data-i18n="newsletterDesc">
                         အထူးအစီအစဉ်များနှင့် ရနံ့သစ် မိတ်ဆက်မှုများကို ပထမဆုံး သိရှိနိုင်ရန် စာရင်းသွင်းပါ။
                     </p>
                     <form onsubmit="handleNewsletter(event)" class="flex flex-col sm:flex-row gap-2 pt-1">
                         <input type="email" required placeholder="အီးမေးလ် လိပ်စာ ရိုက်ထည့်ပါ..."
-                            class="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white placeholder-sand focus:outline-none focus:border-gold" />
+                            class="w-full px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-xs text-white placeholder-vanilla/50 focus:outline-none focus:border-gold" />
                         <button type="submit"
                             class="w-full sm:w-auto px-5 py-2.5 rounded-xl btn-gold font-semibold text-xs whitespace-nowrap"
                             data-i18n="subscribeBtn">
@@ -861,7 +1338,7 @@
             </div>
 
             <!-- Copyright -->
-            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-sand/70 gap-4">
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-vanilla/60 gap-4">
                 <p>© 2026 Kaung Kan Lin. All rights reserved.</p>
                 <p class="font-mm">ကောင်းကံလင်း ဖယောင်းတိုင်လုပ်ငန်း</p>
             </div>
@@ -870,22 +1347,22 @@
 
     <!-- Interactive Quick View Modal Popup -->
     <div id="quickViewModal"
-        class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-md">
+        class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 bg-charcoal/50 backdrop-blur-sm">
         <div
-            class="relative w-full max-w-2xl rounded-3xl glass-card bg-white/90 border border-white p-6 sm:p-8 max-h-[90vh] overflow-y-auto shadow-2xl">
+            class="sheet-in relative w-full max-w-2xl rounded-t-[28px] sm:rounded-3xl glass-card bg-white/95 border border-white p-5 pb-8 sm:p-8 max-h-[88vh] overflow-y-auto shadow-2xl">
 
             <!-- Close Button -->
             <button onclick="closeQuickView()"
-                class="absolute top-4 right-4 w-9 h-9 rounded-full bg-rose-soft/80 flex items-center justify-center text-charcoal hover:bg-crimson hover:text-white transition-colors">
+                class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-rose-soft/80 flex items-center justify-center text-charcoal hover:bg-crimson hover:text-white transition-colors">
                 <i class="fa-solid fa-xmark text-sm"></i>
             </button>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
                 <!-- Product Image -->
-                <div class="relative rounded-2xl overflow-hidden aspect-square bg-rose-soft">
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-square bg-rose-soft">
                     <img id="qvImage" src="" alt="Candle" class="w-full h-full object-cover" />
                     <span id="qvBadge"
-                        class="absolute top-3 left-3 text-[10px] font-bold px-3 py-1 rounded-full bg-gold text-white shadow-xs"></span>
+                        class="absolute top-3 left-3 text-[10px] font-bold px-3 py-1 rounded-full bg-white/80 text-crimson shadow-xs backdrop-blur-sm"></span>
                 </div>
 
                 <!-- Details -->
@@ -945,10 +1422,11 @@
         class="fixed inset-0 z-50 hidden bg-charcoal/40 backdrop-blur-xs transition-opacity"></div>
 
     <div id="cartDrawer"
-        class="fixed top-0 right-0 z-50 h-full w-full sm:w-96 glass-card bg-white/95 border-l border-white shadow-2xl transition-transform transform translate-x-full duration-300 flex flex-col">
+        class="fixed z-50 bottom-0 left-0 right-0 h-[88vh] rounded-t-[28px] sm:top-0 sm:left-auto sm:right-0 sm:h-full sm:rounded-none sm:w-96 glass-card bg-white/95 border-l border-white shadow-2xl transition-transform transform translate-x-full duration-300 flex flex-col">
 
+        <div class="sm:hidden mx-auto mt-2.5 h-1 w-10 rounded-full bg-blush"></div>
         <!-- Drawer Header -->
-        <div class="p-6 border-b border-blush/60 flex items-center justify-between">
+        <div class="p-4 sm:p-6 border-b border-blush/60 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-bag-shopping text-copper text-lg"></i>
                 <h3 class="text-lg font-bold text-charcoal font-serif-heading" data-i18n="cartTitle">စျေးဝယ်ခြင်း</h3>
@@ -999,7 +1477,21 @@
     </div>
 
     <!-- Dynamic Toast Container -->
-    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+    <!-- Floating Bottom Bar (mobile): call, Viber, Telegram, cart -->
+    <nav class="bottom-bar md:hidden">
+        <a href="tel:+959402938502" class="bb-btn tap" aria-label="Phone"><i
+                class="fa-solid fa-phone text-copper"></i></a>
+        <a href="viber://chat?number=%2B959402938502" class="bb-btn tap" style="color:#7360F2" aria-label="Viber"><i
+                class="fa-brands fa-viber"></i></a>
+        <a href="https://t.me/thuta1426" target="_blank" rel="noopener noreferrer" class="bb-btn tap"
+            style="color:#229ED9" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <button onclick="toggleCartDrawer(true)" class="bb-cart btn-gold tap" aria-label="Cart"><i
+                class="fa-solid fa-bag-shopping"></i><span id="cartBadgeBar">0</span></button>
+    </nav>
+
+    <div id="toastContainer"
+        class="fixed z-[60] bottom-24 left-4 right-4 md:bottom-6 md:left-auto md:right-6 flex flex-col items-center md:items-end gap-2 pointer-events-none">
+    </div>
 
     <!-- Application Logic JavaScript -->
     <script>
@@ -1015,6 +1507,7 @@
         let searchQuery = '';
         let currentQvProduct = null;
         let qvQuantity = 1;
+        let lastCartCount = 0;
 
         // Master Product Data Array
         const products = [
@@ -1023,7 +1516,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Large",
                 categoryName: { mm: "အကြီး", en: "Large Set" },
-                price: { mmk: 3600+250, usd: 1.71+0.11 },
+                price: { mmk: 3600 + 250, usd: 1.71 + 0.11 },
                 burnTime: { mm: "၂ နာရီ", en: "2 Hours" },
                 description: { mm: "၆ တိုင်ပါ အကြီးထုပ်", en: "6-piece Large set" },
                 notes: { mm: "-", en: "-" },
@@ -1036,7 +1529,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Large",
                 categoryName: { mm: "အကြီး", en: "Large Set" },
-                price: { mmk: 3200+300, usd: 1.52+0.14 },
+                price: { mmk: 3200 + 300, usd: 1.52 + 0.14 },
                 burnTime: { mm: "၁ နာရီခွဲ", en: "1.5 Hours" },
                 description: { mm: "၁၀ တိုင်ပါ အကြီးထုပ်", en: "10-piece Large set" },
                 notes: { mm: "-", en: "-" },
@@ -1049,7 +1542,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Large",
                 categoryName: { mm: "အကြီး", en: "Large Set" },
-                price: { mmk: 2700+300, usd: 1.28+0.14 },
+                price: { mmk: 2700 + 300, usd: 1.28 + 0.14 },
                 burnTime: { mm: "၁ နာရီခွဲ", en: "1.5 Hours" },
                 description: { mm: "၈ တိုင်ပါ အကြီးထုပ်", en: "8-piece Large set" },
                 notes: { mm: "-", en: "-" },
@@ -1062,7 +1555,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Normal",
                 categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
-                price: { mmk: 2100+450, usd: 1.00+0.21 },
+                price: { mmk: 2100 + 450, usd: 1.00 + 0.21 },
                 burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
                 description: { mm: "၁၆ တိုင်ပါ ပုံမှန်ထုပ်", en: "16-piece Normal set" },
                 notes: { mm: "-", en: "-" },
@@ -1075,7 +1568,7 @@
                 name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
                 category: "Normal",
                 categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
-                price: { mmk: 2180+450, usd: 1.03+0.21 },
+                price: { mmk: 2180 + 450, usd: 1.03 + 0.21 },
                 burnTime: { mm: "၁ နာရီ", en: "1 Hour" },
                 description: { mm: "၁၆ တိုင်ပါ ပုံမှန်ထုပ်", en: "16-piece Normal set" },
                 notes: { mm: "-", en: "-" },
@@ -1088,7 +1581,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Normal",
                 categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
-                price: { mmk: 2100+450, usd: 1.00+0.21 },
+                price: { mmk: 2100 + 450, usd: 1.00 + 0.21 },
                 burnTime: { mm: "၃၀ မိနစ်", en: "30 Mins" },
                 description: { mm: "၃၂ တိုင်ပါ ပုံမှန်ထုပ်", en: "32-piece Normal set" },
                 notes: { mm: "-", en: "-" },
@@ -1101,7 +1594,7 @@
                 name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
                 category: "Normal",
                 categoryName: { mm: "ပုံမှန်", en: "Normal Set" },
-                price: { mmk: 2180+450, usd: 1.03+0.21 },
+                price: { mmk: 2180 + 450, usd: 1.03 + 0.21 },
                 burnTime: { mm: "၃၀ မိနစ်", en: "30 Mins" },
                 description: { mm: "၃၂ တိုင်ပါ ပုံမှန်ထုပ်", en: "32-piece Normal set" },
                 notes: { mm: "-", en: "-" },
@@ -1114,7 +1607,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Small",
                 categoryName: { mm: "အသေး", en: "Small Set" },
-                price: { mmk: 1650+500, usd: 0.78+0.23 },
+                price: { mmk: 1650 + 500, usd: 0.78 + 0.23 },
                 burnTime: { mm: "၂၀ မိနစ်", en: "20 Mins" },
                 description: { mm: "၃၂ တိုင်ပါ အသေးထုပ်", en: "32-piece small set" },
                 notes: { mm: "-", en: "-" },
@@ -1127,7 +1620,7 @@
                 name: { mm: "ဖယောင်းတိုင် အနီ", en: "Red candle" },
                 category: "Small",
                 categoryName: { mm: "အသေး", en: "Small Set" },
-                price: { mmk: 1700+580, usd: 0.80+0.27 },
+                price: { mmk: 1700 + 580, usd: 0.80 + 0.27 },
                 burnTime: { mm: "၂၀ မိနစ်", en: "20 Mins" },
                 description: { mm: "၃၂ တိုင်ပါ အသေးထုပ်", en: "32-piece small set" },
                 notes: { mm: "-", en: "-" },
@@ -1140,7 +1633,7 @@
                 name: { mm: "ဖယောင်းတိုင် အဖြူ", en: "White candle" },
                 category: "Small",
                 categoryName: { mm: "အသေး", en: "Small Set" },
-                price: { mmk: 1030+470, usd: 0.49+0.22 },
+                price: { mmk: 1030 + 470, usd: 0.49 + 0.22 },
                 burnTime: { mm: "၂၀ မိနစ်", en: "20 Mins" },
                 description: { mm: "၂၀ တိုင်ပါ အသေးထုပ်", en: "20-piece small set" },
                 notes: { mm: "-", en: "-" },
@@ -1289,6 +1782,7 @@
             updateCartUI();
             initParallaxEffect();
             initSmoothScroll();
+            initReveal();
         });
 
         // Language Toggle Function
@@ -1319,45 +1813,33 @@
             if (currentQvProduct) renderQvModalData();
         }
 
-        // Best Sellers Grid Render
+        // Compact product card (shared by slider + 2-column grid)
+        function productCard(p, slide, i) {
+            const tr = i18n[currentLang];
+            return `
+        <article class="p-card ${slide ? 'p-card-slide' : ''}" style="--i:${i}">
+          <button type="button" onclick="openQuickView('${p.id}')" class="p-media">
+            <img src="${p.image}" alt="${p.name[currentLang]}" loading="lazy" />
+            <span class="p-badge">${p.badge[currentLang]}</span>
+            <span class="p-time"><i class="fa-regular fa-clock"></i>${p.burnTime[currentLang]}</span>
+          </button>
+          <div class="p-body">
+            <span class="p-cat">${p.categoryName[currentLang]}</span>
+            <h3 class="p-title font-serif-heading">${p.name[currentLang]}</h3>
+            ${slide ? '' : `<p class="p-desc">${p.description[currentLang]}</p>`}
+            <div class="p-price"><b>${p.price.mmk.toLocaleString()} MMK</b><small>$${p.price.usd.toFixed(2)} USD</small></div>
+            <div class="p-actions">
+              <button onclick="openQuickView('${p.id}')" class="p-qv tap"><i class="fa-regular fa-eye"></i><span class="sr-only">${tr.quickView}</span></button>
+              <button onclick="addToCart('${p.id}')" class="p-add btn-gold tap"><i class="fa-solid fa-plus text-[10px]"></i><span>${tr.addToCart}</span></button>
+            </div>
+          </div>
+        </article>`;
+        }
+
+        // Best Sellers Slider Render
         function renderBestSellers() {
             const container = document.getElementById('bestsellersContainer');
-            const bestSellers = products.filter(p => p.isBestSeller);
-
-            container.innerHTML = bestSellers.map(product => `
-        <div class="glass-card rounded-2xl overflow-hidden glass-card-hover flex flex-col justify-between group">
-          <div class="relative aspect-[4/3] overflow-hidden bg-rose-soft">
-            <img src="${product.image}" alt="${product.name[currentLang]}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gold/90 text-white shadow-xs backdrop-blur-xs">
-              ${product.badge[currentLang]}
-            </span>
-          </div>
-
-          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-copper uppercase tracking-wider">${product.categoryName[currentLang]}</span>
-              <h3 class="text-base font-bold text-charcoal font-serif-heading line-clamp-2 h-12 flex items-center">${product.name[currentLang]}</h3>
-            </div>
-
-            <div class="flex items-center justify-between text-xs border-t border-blush/60 pt-3">
-              <div>
-                <span class="block text-sm font-bold text-crimson font-sansEn">${product.price.mmk.toLocaleString()} MMK</span>
-                <span class="block text-[10px] text-sand font-sansEn">$${product.price.usd.toFixed(2)} USD</span>
-              </div>
-              <span class="text-[10px] text-sand bg-rose-soft px-2 py-1 rounded-md font-sansEn"><i class="fa-regular fa-clock mr-1"></i>${product.burnTime[currentLang]}</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 pt-1">
-              <button onclick="openQuickView('${product.id}')" class="py-2 rounded-xl btn-outline text-xs font-semibold text-center">
-                ${i18n[currentLang].quickView}
-              </button>
-              <button onclick="addToCart('${product.id}')" class="py-2 rounded-xl btn-gold text-xs font-semibold text-center flex items-center justify-center gap-1">
-                <i class="fa-solid fa-plus text-[10px]"></i> ${i18n[currentLang].addToCart}
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('');
+            container.innerHTML = products.filter(p => p.isBestSeller).map((p, i) => productCard(p, true, i)).join('');
         }
 
         // Main Catalog Render & Search Filter
@@ -1380,41 +1862,7 @@
             }
 
             emptyState.classList.add('hidden');
-            grid.innerHTML = filtered.map(product => `
-        <div class="glass-card rounded-2xl overflow-hidden glass-card-hover flex flex-col justify-between group">
-          <div class="relative aspect-[4/3] overflow-hidden bg-rose-soft">
-            <img src="${product.image}" alt="${product.name[currentLang]}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <span class="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-gold/90 text-white shadow-xs backdrop-blur-xs">
-              ${product.badge[currentLang]}
-            </span>
-          </div>
-
-          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
-            <div class="space-y-1">
-              <span class="text-[10px] font-bold text-copper uppercase tracking-wider">${product.categoryName[currentLang]}</span>
-              <h3 class="text-base font-bold text-charcoal font-serif-heading line-clamp-2 h-12 flex items-center">${product.name[currentLang]}</h3>
-              <p class="text-xs text-sand line-clamp-2 leading-relaxed">${product.description[currentLang]}</p>
-            </div>
-
-            <div class="flex items-center justify-between text-xs border-t border-blush/60 pt-3">
-              <div>
-                <span class="block text-base font-bold text-crimson font-sansEn">${product.price.mmk.toLocaleString()} MMK</span>
-                <span class="block text-[10px] text-sand font-sansEn">$${product.price.usd.toFixed(2)} USD</span>
-              </div>
-              <span class="text-[10px] text-sand bg-rose-soft px-2.5 py-1 rounded-md font-sansEn"><i class="fa-regular fa-clock mr-1"></i>${product.burnTime[currentLang]}</span>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2 pt-1">
-              <button onclick="openQuickView('${product.id}')" class="py-2.5 rounded-xl btn-outline text-xs font-semibold text-center">
-                ${i18n[currentLang].quickView}
-              </button>
-              <button onclick="addToCart('${product.id}')" class="py-2.5 rounded-xl btn-gold text-xs font-semibold text-center flex items-center justify-center gap-1">
-                <i class="fa-solid fa-plus text-[10px]"></i> ${i18n[currentLang].addToCart}
-              </button>
-            </div>
-          </div>
-        </div>
-      `).join('');
+            grid.innerHTML = filtered.map((p, i) => productCard(p, false, i)).join('');
         }
 
         // Category Pill Filter Event
@@ -1422,11 +1870,13 @@
             activeCategory = cat;
             document.querySelectorAll('#categoryPills button').forEach(btn => {
                 if (btn.getAttribute('data-cat') === cat) {
-                    btn.className = "cat-pill active px-5 py-2 rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs";
+                    btn.className = "cat-pill active px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border transition-all btn-gold shadow-xs";
                 } else {
-                    btn.className = "cat-pill px-5 py-2 rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all";
+                    btn.className = "cat-pill px-4 py-2 shrink-0 snap-start whitespace-nowrap rounded-full text-xs font-semibold border border-blush bg-white/60 text-sand hover:text-copper hover:border-copper transition-all";
                 }
             });
+            const act = document.querySelector('#categoryPills button[data-cat="' + cat + '"]');
+            if (act && act.scrollIntoView) act.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
             renderCatalog();
         }
 
@@ -1531,6 +1981,12 @@
             // Badge Count
             const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
             document.getElementById('cartBadge').innerText = totalItems;
+            const barBadge = document.getElementById('cartBadgeBar');
+            if (barBadge) barBadge.innerText = totalItems;
+            if (window.gsap && totalItems !== lastCartCount) {
+                gsap.fromTo(['#cartBadge', '#cartBadgeBar'], { scale: 1.5 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+            }
+            lastCartCount = totalItems;
 
             // Cart Items List
             const container = document.getElementById('cartItemsContainer');
@@ -1693,6 +2149,16 @@
                     duration: 0.8
                 });
             });
+        }
+
+        // Scroll reveal for section headers and story cards
+        function initReveal() {
+            if (!('IntersectionObserver' in window)) return;
+            document.documentElement.classList.add('js-reveal');
+            const io = new IntersectionObserver(entries => entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            }), { threshold: 0.12 });
+            document.querySelectorAll('.reveal').forEach(el => io.observe(el));
         }
 
         // GSAP Smooth Scroll Navigation Links
